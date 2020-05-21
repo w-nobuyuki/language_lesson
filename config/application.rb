@@ -24,6 +24,9 @@ module LanguageLesson
         controller_specs: false,
         request_specs: false,
         system_specs: true
+
+      g.assets false
+      g.helper false
     end
   end
 end
