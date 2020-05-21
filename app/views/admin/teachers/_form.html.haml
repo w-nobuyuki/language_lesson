@@ -1,0 +1,18 @@
+= form_for [:admin, @teacher] do |f|
+  - if @teacher.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@teacher.errors.count, "error")} prohibited this teacher from being saved:"
+      %ul
+        - @teacher.errors.full_messages.each do |message|
+          %li= message
+  .form-group
+    = f.label :email
+    = f.email_field :email
+  .form-group
+    = f.label :password
+    = f.password_field :password
+  .form-group
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation
+  .actions
+    = f.submit 'Save'

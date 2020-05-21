@@ -1,0 +1,21 @@
+%h1 Listing teachers
+
+%table
+  %thead
+    %tr
+      %th Email
+      %th
+      %th
+      %th
+
+  %tbody
+    - @teachers.each do |teacher|
+      %tr
+        %td= teacher.email
+        %td= link_to 'Show', [:admin, teacher]
+        %td= link_to 'Edit', edit_admin_teacher_path(teacher)
+        %td= link_to 'Destroy', [:admin, teacher], method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Teacher', new_admin_teacher_path

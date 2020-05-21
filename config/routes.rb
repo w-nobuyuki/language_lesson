@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :admins
   namespace :admin do
     root 'home#index'
+    resources :teachers
   end
   root 'home#index'
   devise_for :teachers
