@@ -50,6 +50,6 @@ class Admin::TeachersController < ApplicationController
   end
 
   def teacher_params
-    params.fetch(:teacher, {}).permit(:email, :password, :password_confirmation)
+    params.fetch(:teacher, {}).permit(:email, :password, :password_confirmation, :name)
   end
 end

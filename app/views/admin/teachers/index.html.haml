@@ -3,6 +3,7 @@
 %table
   %thead
     %tr
+      %th Name
       %th Email
       %th
       %th
@@ -11,6 +12,7 @@
   %tbody
     - @teachers.each do |teacher|
       %tr
+        %td= teacher.name
         %td= teacher.email
         %td= link_to 'Show', [:admin, teacher]
         %td= link_to 'Edit', edit_admin_teacher_path(teacher)
