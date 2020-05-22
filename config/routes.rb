@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   devise_for :teachers
   namespace :teacher do
     root 'home#index'
+    get 'edit', to: 'home#edit'
+    patch 'update', to: 'home#update'
   end
 
   root 'home#index'

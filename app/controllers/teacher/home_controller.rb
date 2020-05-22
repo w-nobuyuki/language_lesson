@@ -3,4 +3,18 @@ class Teacher::HomeController < ApplicationController
 
   def index
   end
+
+  def edit
+    @teacher = current_teacher
+  end
+
+  def update
+    @teacher = current_teacher
+  end
+
+  private
+
+  def teacher_params
+    
+  end
 end
