@@ -32,6 +32,10 @@ class DeviseCreateTeachers < ActiveRecord::Migration[6.0]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
+      ## 追加属性
+      t.string :name, null: false
+      t.text   :profile
+      t.string :avatar
 
       t.timestamps null: false
     end

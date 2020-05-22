@@ -4,6 +4,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.6'
 
 gem 'bootsnap', '>= 1.4.2', require: false
+gem 'carrierwave', '~> 2.0'
+gem 'cloudinary'
 gem 'devise'
 gem 'devise-i18n'
 gem 'haml-rails'
