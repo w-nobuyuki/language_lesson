@@ -1,4 +1,10 @@
-= form_for @teacher do ||
-  
-.form-group
-.form-group
+= form_for @teacher, url: teacher_update_path do |f|
+  .form-group
+    = f.text_field :name
+  .form-group
+    = f.text_area :profile
+  .form-group
+    = f.file_field :avatar
+  .form-group
+    = f.collection_select :language_ids, @languages, :id, :name, { include_hidden: false }, { multiple: true }
+  = f.submit '更新する'

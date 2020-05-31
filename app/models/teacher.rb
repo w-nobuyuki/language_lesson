@@ -1,4 +1,9 @@
 class Teacher < ApplicationRecord
+  has_many :supported_languages
+  has_many :languages, through: :supported_languages
+
+  mount_uploader :avatar, AvatarUploader
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
