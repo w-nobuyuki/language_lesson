@@ -1,6 +1,7 @@
 class Teacher < ApplicationRecord
   has_many :supported_languages
   has_many :languages, through: :supported_languages
+  has_many :lessons
 
   mount_uploader :avatar, AvatarUploader
 

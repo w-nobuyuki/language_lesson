@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     root 'home#index'
     get 'edit', to: 'home#edit'
     patch 'update', to: 'home#update'
+    resources :lessons, except: %i[show]
   end
 
   root 'home#index'
