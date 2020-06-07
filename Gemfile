@@ -16,6 +16,7 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.1'
 gem 'rails-i18n', '~> 6.0.0'
 gem 'sass-rails', '>= 6'
 gem 'simple_form'
+gem 'stripe'
 gem 'turbolinks', '~> 5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'webpacker', '~> 4.0'

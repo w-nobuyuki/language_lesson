@@ -1,0 +1,21 @@
+%h1 Listing lesson_tickets
+
+%table
+  %thead
+    %tr
+      %th User
+      %th
+      %th
+      %th
+
+  %tbody
+    - @lesson_tickets.each do |lesson_ticket|
+      %tr
+        %td= lesson_ticket.user
+        %td= link_to 'Show', lesson_ticket
+        %td= link_to 'Edit', edit_lesson_ticket_path(lesson_ticket)
+        %td= link_to 'Destroy', lesson_ticket, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Lesson ticket', new_lesson_ticket_path

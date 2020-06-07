@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @lesson_ticket.user
+
+= link_to 'Edit', edit_lesson_ticket_path(@lesson_ticket)
+\|
+= link_to 'Back', lesson_tickets_path
