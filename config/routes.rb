@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :lesson_tickets
   devise_for :admins
   namespace :admin do
     root 'home#index'
