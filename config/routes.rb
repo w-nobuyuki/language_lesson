@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :charges
   devise_for :admins
   namespace :admin do
     root 'home#index'
