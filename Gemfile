@@ -30,6 +30,7 @@ end
 
 group :development do
   gem 'listen', '~> 3.2'
+  gem 'pry-byebug'
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen', '~> 2.0.0'
