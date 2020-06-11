@@ -1,8 +1,13 @@
 class ChargesController < ApplicationController
-  before_action :set_charge, only: [:show, :edit, :update, :destroy]
+  before_action :set_charge, only: [:show, :edit, :update, :destroy, :success, :cancel]
 
   def index
     @charges = Charge.all
+
+    if params[:session_id].present? &&
+      session = Stripe::Checkout::Session.retrieve(params[:session_id])
+
+    end
   end
 
   def show
@@ -10,19 +15,50 @@ class ChargesController < ApplicationController
 
   def new
     @charge = Charge.new
-
-    @session = Stripe::Checkout::Session.create(
-      payment_method_types: ['card'],
-      line_items: [
-        {
-          price: 'price_1GsQ4THzEmLLomVZXKVysxqO',
-          quantity: 1
-        }
-      ],
-      mode: 'payment',
-      success_url: 'http://localhost:3000/charges',
-      cancel_url: 'http://localhost:3000/charges'
-    )
+    case params[:amount]
+    when "1"
+      @session = Stripe::Checkout::Session.create(
+        payment_method_types: ['card'],
+        line_items: [
+          {
+            price: 'price_1GsQ4THzEmLLomVZXKVysxqO',
+            quantity: 1
+          }
+        ],
+        mode: 'payment',
+        # TODO: herokuでも動くようにする必要あり
+        success_url: 'http://localhost:3000/charges?session_id={CHECKOUT_SESSION_ID}',
+        cancel_url: 'http://localhost:3000/charges'
+      )
+    when "3"
+      @session = Stripe::Checkout::Session.create(
+        payment_method_types: ['card'],
+        line_items: [
+          {
+            price: 'price_1GsQ4nHzEmLLomVZeAbwMVXB',
+            quantity: 1
+          }
+        ],
+        mode: 'payment',
+        success_url: 'http://localhost:3000/charges?session_id={CHECKOUT_SESSION_ID}',
+        cancel_url: 'http://localhost:3000/charges'
+      )
+    when "5"
+      @session = Stripe::Checkout::Session.create(
+        payment_method_types: ['card'],
+        line_items: [
+          {
+            price: 'price_1GsQ57HzEmLLomVZ0vpvDEZj',
+            quantity: 1
+          }
+        ],
+        mode: 'payment',
+        success_url: 'http://localhost:3000/charges?session_id={CHECKOUT_SESSION_ID}',
+        cancel_url: 'http://localhost:3000/charges'
+      )
+    else
+      @session = nil
+    end
   end
 
   def edit
@@ -70,6 +106,14 @@ class ChargesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to charges_url, notice: 'Charge was successfully destroyed.' }
     end
+  end
+
+  def success
+    
+  end
+
+  def cancel
+    
   end
 
   private

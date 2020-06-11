@@ -41,13 +41,6 @@ ActiveRecord::Schema.define(version: 2020_06_10_051006) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "lesson_tickets", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_lesson_tickets_on_user_id"
-  end
-
   create_table "lessons", force: :cascade do |t|
     t.bigint "teacher_id", null: false
     t.bigint "language_id", null: false
@@ -95,7 +88,6 @@ ActiveRecord::Schema.define(version: 2020_06_10_051006) do
   end
 
   add_foreign_key "charges", "users"
-  add_foreign_key "lesson_tickets", "users"
   add_foreign_key "lessons", "languages"
   add_foreign_key "lessons", "teachers"
   add_foreign_key "supported_languages", "languages"
