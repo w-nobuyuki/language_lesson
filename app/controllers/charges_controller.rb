@@ -4,9 +4,25 @@ class ChargesController < ApplicationController
   def index
     @charges = Charge.all
 
-    if params[:session_id].present? &&
-      session = Stripe::Checkout::Session.retrieve(params[:session_id])
+    if params[:session_id].present? && session = Stripe::Checkout::Session.retrieve(params[:session_id])
+      return if current_user.charges.find_by(stripe_session_id: params[:session_id]).present?
 
+      charge = current_user.charges.build(
+        stripe_session_id: params[:session_id],
+        stripe_payment_intent_id: session[:payment_intent]
+      )
+      payment_intent = Stripe::PaymentIntent.retrieve(session[:payment_intent])
+      case payment_intent[:amount]
+      when 2000
+        charge.lesson_tickets.build
+      when 5000
+        3.times { charge.lesson_tickets.build }
+      when 7500
+        5.times { charge.lesson_tickets.build }
+      else
+        return
+      end
+      charge.save!
     end
   end
 
@@ -27,7 +43,7 @@ class ChargesController < ApplicationController
         ],
         mode: 'payment',
         # TODO: herokuでも動くようにする必要あり
-        success_url: 'http://localhost:3000/charges?session_id={CHECKOUT_SESSION_ID}',
+        success_url: "http://localhost:3000/charges?session_id={CHECKOUT_SESSION_ID}",
         cancel_url: 'http://localhost:3000/charges'
       )
     when "3"
@@ -40,7 +56,7 @@ class ChargesController < ApplicationController
           }
         ],
         mode: 'payment',
-        success_url: 'http://localhost:3000/charges?session_id={CHECKOUT_SESSION_ID}',
+        success_url: "http://localhost:3000/charges?session_id={CHECKOUT_SESSION_ID}",
         cancel_url: 'http://localhost:3000/charges'
       )
     when "5"
@@ -53,7 +69,7 @@ class ChargesController < ApplicationController
           }
         ],
         mode: 'payment',
-        success_url: 'http://localhost:3000/charges?session_id={CHECKOUT_SESSION_ID}',
+        success_url: "http://localhost:3000/charges?session_id={CHECKOUT_SESSION_ID}",
         cancel_url: 'http://localhost:3000/charges'
       )
     else

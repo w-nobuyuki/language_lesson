@@ -1,16 +1,3 @@
-= form_for @charge do |f|
-  - if @charge.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@charge.errors.count, "error")} prohibited this charge from being saved:"
-      %ul
-        - @charge.errors.full_messages.each do |message|
-          %li= message
-  .field
-    = f.label :amount
-    = f.number_field :amount
-  .actions
-    = f.submit 'Save'
-
 :javascript
   var stripe = Stripe("#{Rails.application.credentials.stripe[:publishable_key]}");
 
