@@ -1,0 +1,17 @@
+%table
+  %thead
+    %tr
+      %th 講師
+      %th レッスン言語
+      %th 日時
+      %th
+  %tbody
+    - @lessons.each do |lesson|
+      %tr
+        %td= lesson.teacher.name
+        %td= lesson.language.name
+        %td
+          = lesson.start_at.strftime("%Y/%m/%d %H:%M")
+          ～
+          = lesson.end_at.strftime("%Y/%m/%d %H:%M")
+        %td= link_to '予約', lesson_reservations_path, method: :post

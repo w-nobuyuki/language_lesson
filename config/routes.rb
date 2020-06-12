@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :charges
   devise_for :admins
   namespace :admin do
     root 'home#index'
@@ -16,5 +15,8 @@ Rails.application.routes.draw do
 
   root 'home#index'
   devise_for :users
+  resources :charges
+  resources :lessons, only: :index
+  resources :lesson_reservations
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
