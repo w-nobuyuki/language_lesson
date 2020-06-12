@@ -1,5 +1,4 @@
-class Teacher::HomeController < ApplicationController
-  before_action :authenticate_teacher!
+class Teacher::HomeController < Teacher::ApplicationController
   before_action :set_teacher, only: %i[edit update]
   before_action :set_languages, only: %i[edit update]
 

@@ -1,5 +1,4 @@
-class Admin::TeachersController < ApplicationController
-  before_action :authenticate_admin!
+class Admin::TeachersController < Admin::ApplicationController
   before_action :set_teacher, only: %i[show edit update destroy]
 
   def index
