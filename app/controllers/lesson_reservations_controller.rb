@@ -19,7 +19,7 @@ class LessonReservationsController < ApplicationController
     @lesson_reservation = current_user.lesson_reservations.build(lesson_reservation_params)
 
     respond_to do |format|
-      if @lesson_reservation.save
+      if @lesson_reservation.save && current_user.lesson_tickets.first.destroy
         format.html { redirect_to lessons_path, notice: 'Lesson reservation was successfully created.' }
       else
         format.html { render :new }
