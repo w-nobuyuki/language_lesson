@@ -1,5 +1,7 @@
 class LessonsController < ApplicationController
   def index
-    @lessons = Lesson.left_joins(:lesson_reservation).where(lesson_reservation: { id: nil })
+    @q = Lesson.ransack(params[:q])
+    @lessons = @q.result.includes(:lesson_reservation, :teacher, :language)
+                 .where(lesson_reservations: { id: nil })
   end
 end

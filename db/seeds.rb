@@ -14,3 +14,25 @@ unless Language.exists?
   Language.create(name: 'フランス語')
   Language.create(name: 'ドイツ語')
 end
+
+unless Admin.exists?
+  Admin.create(email: 'admin@tryout.com', password: 'password')
+end
+
+unless Teacher.exists?
+  teacher = Teacher.new(email: 'teacher@tryout.com', name: 'Teacher', password: 'password')
+  teacher.supported_languages.build(language_id: 1)
+  teacher.supported_languages.build(language_id: 2)
+  teacher.supported_languages.build(language_id: 3)
+  teacher.lessons.build(language_id: 1, start_at: "2020/6/13 8:00")
+  teacher.lessons.build(language_id: 2, start_at: "2020/7/13 9:00")
+  teacher.lessons.build(language_id: 2, start_at: "2020/7/13 10:00")
+  teacher.save!
+end
+
+unless User.exists?
+  user = User.create(email: 'user@tryout.com', password: 'password')
+  charge = Charge.new(stripe_session_id: 'dummy', stripe_payment_intent_id: 'dummy', user: user)
+  3.times { charge.lesson_tickets.build }
+  charge.save!
+end

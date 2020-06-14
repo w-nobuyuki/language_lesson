@@ -1,3 +1,18 @@
+= search_form_for @q do |f|
+  = f.label :teacher_name_eq
+  = f.collection_select :teacher_name_eq, Teacher.all, :name, :name, { include_blank: true }
+  %br/
+  = f.label :language_name_eq
+  = f.collection_select :language_name_eq, Language.all, :name, :name, { include_blank: true }
+  %br/
+  = f.label :start_at_gteq
+  = f.datetime_field :start_at_gteq, step: 3600
+  %br/
+  = f.label :start_at_lt
+  = f.datetime_field :start_at_lt, step: 3600
+  %br/
+  = f.submit
+
 %table
   %thead
     %tr
@@ -13,5 +28,8 @@
         %td
           = lesson.start_at.strftime("%Y/%m/%d %H:%M")
           ～
-          = lesson.end_at.strftime("%Y/%m/%d %H:%M")
-        %td= link_to '予約', lesson_reservations_path, method: :post
+          = lesson.end_at.strftime("%H:%M")
+        %td
+          = form_for LessonReservation.new do |f|
+            = f.hidden_field :lesson_id, value: lesson.id
+            = f.button '予約'
