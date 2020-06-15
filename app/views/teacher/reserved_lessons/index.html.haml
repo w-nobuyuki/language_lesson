@@ -1,0 +1,14 @@
+%table
+  %thead
+    %tr
+      %th ユーザー名
+      %th 日時
+      %th 言語
+      %th zoom URL
+  %tbody
+    - @lessons.each do |lesson|
+      %tr
+        %td= lesson.user.email
+        %td= lesson.start_at.strftime("%Y/%m/%d %H:%M")
+        %td= lesson.language.name
+        %td
