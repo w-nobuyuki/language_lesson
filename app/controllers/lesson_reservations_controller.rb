@@ -17,9 +17,15 @@ class LessonReservationsController < ApplicationController
 
   def create
     @lesson_reservation = current_user.lesson_reservations.build(lesson_reservation_params)
+    if current_user.lesson_tickets.blank?
+      redirect_to charges_path, notice: 'レッスンの予約にはチケットの購入が必要です'
+      return
+    end
+
+    current_user.lesson_tickets.first.destroy! if @lesson_reservation.valid?
 
     respond_to do |format|
-      if @lesson_reservation.save && current_user.lesson_tickets.first.destroy
+      if @lesson_reservation.save
         format.html { redirect_to lessons_path, notice: 'Lesson reservation was successfully created.' }
       else
         format.html { render :new }
