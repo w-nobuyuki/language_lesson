@@ -25,10 +25,7 @@
       %tr
         %td= lesson.teacher.name
         %td= lesson.language.name
-        %td
-          = lesson.start_at.strftime("%Y/%m/%d %H:%M")
-          ～
-          = lesson.end_at.strftime("%H:%M")
+        %td= h_lesson_datetime(lesson)
         %td
           = form_for LessonReservation.new do |f|
             = f.hidden_field :lesson_id, value: lesson.id

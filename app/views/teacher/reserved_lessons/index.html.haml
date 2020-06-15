@@ -9,6 +9,6 @@
     - @lessons.each do |lesson|
       %tr
         %td= lesson.user.email
-        %td= lesson.start_at.strftime("%Y/%m/%d %H:%M")
+        %td= h_lesson_datetime(lesson)
         %td= lesson.language.name
         %td

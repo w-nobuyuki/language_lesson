@@ -13,5 +13,5 @@
       %tr
         %td= lesson_reservation.lesson.teacher.name
         %td= lesson_reservation.lesson.language.name
-        %td= lesson_reservation.lesson.start_at.strftime("%Y/%m/%d %H:%M")
+        %td= h_lesson_datetime(lesson_reservation.lesson)
         %td
