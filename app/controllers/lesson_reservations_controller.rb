@@ -2,7 +2,7 @@ class LessonReservationsController < ApplicationController
   before_action :set_lesson_reservation, only: [:show, :edit, :update, :destroy]
 
   def index
-    @lesson_reservations = current_user.lesson_reservations.includes(:lesson)
+    @lesson_reservations = current_user.lesson_reservations.includes(lesson: [:teacher, :language])
   end
 
   def show

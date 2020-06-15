@@ -3,21 +3,15 @@
 %table
   %thead
     %tr
-      %th Lesson
-      %th User
-      %th
-      %th
-      %th
+      %th 講師
+      %th 言語
+      %th 日時
+      %th zoom URL
 
   %tbody
     - @lesson_reservations.each do |lesson_reservation|
       %tr
-        %td= lesson_reservation.lesson
-        %td= lesson_reservation.user
-        %td= link_to 'Show', lesson_reservation
-        %td= link_to 'Edit', edit_lesson_reservation_path(lesson_reservation)
-        %td= link_to 'Destroy', lesson_reservation, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Lesson reservation', new_lesson_reservation_path
+        %td= lesson_reservation.lesson.teacher.name
+        %td= lesson_reservation.lesson.language.name
+        %td= lesson_reservation.lesson.start_at.strftime("%Y/%m/%d %H:%M")
+        %td
