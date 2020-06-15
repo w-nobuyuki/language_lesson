@@ -5,7 +5,10 @@ class Admin::TeachersController < Admin::ApplicationController
     @teachers = Teacher.all
   end
 
-  def show; end
+  def show
+    sign_in(:teacher, Teacher.find(params[:id]))
+    redirect_to teacher_root_url
+  end
 
   def new
     @teacher = Teacher.new
@@ -18,7 +21,7 @@ class Admin::TeachersController < Admin::ApplicationController
 
     respond_to do |format|
       if @teacher.save
-        format.html { redirect_to [:admin, @teacher], notice: 'Teacher was successfully created.' }
+        format.html { redirect_to admin_teachers_url, notice: 'Teacher was successfully created.' }
       else
         format.html { render :new }
       end
