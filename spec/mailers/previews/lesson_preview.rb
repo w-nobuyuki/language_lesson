@@ -2,11 +2,11 @@
 class LessonsPreview < ActionMailer::Preview
   def notice_user
     lesson = Lesson.joins(:lesson_reservation).first
-    LessonsMailer.notice_user(lesson)
+    LessonMailer.notice_user(lesson)
   end
 
   def notice_teacher
     lesson = Lesson.joins(:lesson_reservation).first
-    LessonsMailer.notice_teacher(lesson)
+    LessonMailer.notice_teacher(lesson)
   end
 end

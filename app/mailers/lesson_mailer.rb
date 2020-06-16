@@ -1,4 +1,4 @@
-class LessonsMailer < ApplicationMailer
+class LessonMailer < ApplicationMailer
   add_template_helper(LessonHelper)
   def notice_user(lesson)
     @lesson = lesson

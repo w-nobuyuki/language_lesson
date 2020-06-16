@@ -26,8 +26,8 @@ class LessonReservationsController < ApplicationController
 
     respond_to do |format|
       if @lesson_reservation.save
-        LessonsMailer.notice_user(@lesson_reservation.lesson)
-        LessonsMailer.notice_teacher(@lesson_reservation.lesson)
+        LessonMailer.notice_user(@lesson_reservation.lesson).deliver_now
+        LessonMailer.notice_teacher(@lesson_reservation.lesson).deliver_now
         format.html { redirect_to lessons_path, notice: 'Lesson reservation was successfully created.' }
       else
         format.html { render :new }
