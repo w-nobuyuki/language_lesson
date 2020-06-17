@@ -42,9 +42,8 @@ class ChargesController < ApplicationController
           }
         ],
         mode: 'payment',
-        # TODO: herokuでも動くようにする必要あり
-        success_url: "http://localhost:3000/charges?session_id={CHECKOUT_SESSION_ID}",
-        cancel_url: 'http://localhost:3000/charges'
+        success_url: root_url + "charges?session_id={CHECKOUT_SESSION_ID}",
+        cancel_url: root_url + 'charges'
       )
     when "3"
       @session = Stripe::Checkout::Session.create(
@@ -56,8 +55,8 @@ class ChargesController < ApplicationController
           }
         ],
         mode: 'payment',
-        success_url: "http://localhost:3000/charges?session_id={CHECKOUT_SESSION_ID}",
-        cancel_url: 'http://localhost:3000/charges'
+        success_url: root_url + "charges?session_id={CHECKOUT_SESSION_ID}",
+        cancel_url: root_url + 'charges'
       )
     when "5"
       @session = Stripe::Checkout::Session.create(
@@ -69,8 +68,8 @@ class ChargesController < ApplicationController
           }
         ],
         mode: 'payment',
-        success_url: "http://localhost:3000/charges?session_id={CHECKOUT_SESSION_ID}",
-        cancel_url: 'http://localhost:3000/charges'
+        success_url: root_url + "charges?session_id={CHECKOUT_SESSION_ID}",
+        cancel_url: root_url + 'charges'
       )
     else
       @session = nil
