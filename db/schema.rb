@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_12_054205) do
+ActiveRecord::Schema.define(version: 2020_06_17_045528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2020_06_12_054205) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "zoom_url", null: false
     t.index ["lesson_id"], name: "index_lesson_reservations_on_lesson_id"
     t.index ["user_id"], name: "index_lesson_reservations_on_user_id"
   end

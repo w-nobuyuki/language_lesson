@@ -8,13 +8,14 @@ gem 'carrierwave', '~> 2.0'
 gem 'cloudinary'
 gem 'devise'
 gem 'devise-i18n'
+gem 'faker'
 gem 'haml-rails'
 gem 'jbuilder', '~> 2.7'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.1'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.1'
-gem 'ransack'
 gem 'rails-i18n', '~> 6.0.0'
+gem 'ransack'
 gem 'sass-rails', '>= 6'
 gem 'simple_form'
 gem 'stripe'
@@ -26,7 +27,6 @@ gem 'zoom_rb'
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_bot_rails'
-  gem 'faker'
   gem 'rspec-rails', '~> 4.0.0'
 end
 

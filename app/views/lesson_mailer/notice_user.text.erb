@@ -2,4 +2,4 @@
 
 担当講師： <%= @lesson.teacher.name %>
 予約時刻： <%= h_lesson_datetime(@lesson) %>
-zoom URL：
+zoom URL： <%= h_lesson_datetime(@lesson.lesson_reservation.zoom_url) %>

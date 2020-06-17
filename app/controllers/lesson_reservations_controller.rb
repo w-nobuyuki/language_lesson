@@ -21,7 +21,24 @@ class LessonReservationsController < ApplicationController
       redirect_to charges_path, notice: 'レッスンの予約にはチケットの購入が必要です'
       return
     end
-
+    zoom_client = Zoom.new
+    meeting_room = zoom_client.meeting_create(
+      user_id: Rails.application.credentials.zoom[:host_id],
+      start_time: @lesson_reservation.lesson.start_at,
+      duration: 50,
+      timezone: 'Asia/Tokyo',
+      password: Faker::Lorem.characters(number: 6),
+      settings: {
+        host_video: true,
+        participant_video: true,
+        cn_meeting: false,
+        in_meeting: false,
+        join_before_host: true,
+        mute_upon_entry: false,
+        waiting_room: false
+      }
+    )
+    @lesson_reservation.zoom_url = meeting_room['join_url']
     current_user.lesson_tickets.first.destroy! if @lesson_reservation.valid?
 
     respond_to do |format|

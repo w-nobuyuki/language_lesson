@@ -2,4 +2,4 @@
 
 予約ユーザー： <%= @lesson.user.email %>
 予約時刻： <%= h_lesson_datetime(@lesson) %>
-zoom URL：
+zoom URL： <%= h_lesson_datetime(@lesson.lesson_reservation.zoom_url) %>
