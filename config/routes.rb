@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :teachers
   end
 
-  devise_for :teachers
+  devise_for :teachers, only: %i[sessions]
   namespace :teacher do
     root 'home#index'
     get 'edit', to: 'home#edit'
