@@ -16,8 +16,9 @@ Rails.application.routes.draw do
 
   root 'home#index'
   devise_for :users
-  resources :charges
+  resources :charges, only: %i[new create]
   resources :lessons, only: :index
+  resources :lesson_tickets, only: :index
   resources :lesson_reservations
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -1,18 +1,37 @@
 class ChargesController < ApplicationController
-  before_action :set_charge, only: [:show, :edit, :update, :destroy, :success, :cancel]
+  protect_from_forgery except: :create
+  skip_before_action :authenticate_user!, only: :create
 
   def index
     @charges = Charge.all
+  end
 
-    if params[:session_id].present? && session = Stripe::Checkout::Session.retrieve(params[:session_id])
-      return if current_user.charges.find_by(stripe_session_id: params[:session_id]).present?
+  def show; end
+
+  def new
+    @charge = Charge.new
+    case params[:amount]
+    when '1'
+      @session = @charge.stripe_checkout_session(price: 'price_1GsQ4THzEmLLomVZXKVysxqO', root_url: root_url)
+    when '3'
+      @session = @charge.stripe_checkout_session(price: 'price_1GsQ4nHzEmLLomVZeAbwMVXB', root_url: root_url)
+    when '5'
+      @session = @charge.stripe_checkout_session(price: 'price_1GsQ57HzEmLLomVZ0vpvDEZj', root_url: root_url)
+    else
+      @session = nil
+    end
+  end
+
+  def edit; end
+
+  def create
+    # if Stripe::PaymentIntent.retrieve(charge_params[:id])
+      return if Charge.find_by(stripe_payment_intent_id: charge_params[:id]).present?
 
       charge = current_user.charges.build(
-        stripe_session_id: params[:session_id],
-        stripe_payment_intent_id: session[:payment_intent]
+        stripe_payment_intent_id: charge_params[:id]
       )
-      payment_intent = Stripe::PaymentIntent.retrieve(session[:payment_intent])
-      case payment_intent[:amount]
+      case charge_params[:amount]
       when 2000
         charge.lesson_tickets.build
       when 5000
@@ -22,87 +41,9 @@ class ChargesController < ApplicationController
       else
         return
       end
-      charge.save!
-    end
-  end
-
-  def show
-  end
-
-  def new
-    @charge = Charge.new
-    case params[:amount]
-    when "1"
-      @session = Stripe::Checkout::Session.create(
-        payment_method_types: ['card'],
-        line_items: [
-          {
-            price: 'price_1GsQ4THzEmLLomVZXKVysxqO',
-            quantity: 1
-          }
-        ],
-        mode: 'payment',
-        success_url: root_url + "charges?session_id={CHECKOUT_SESSION_ID}",
-        cancel_url: root_url + 'charges'
-      )
-    when "3"
-      @session = Stripe::Checkout::Session.create(
-        payment_method_types: ['card'],
-        line_items: [
-          {
-            price: 'price_1GsQ4nHzEmLLomVZeAbwMVXB',
-            quantity: 1
-          }
-        ],
-        mode: 'payment',
-        success_url: root_url + "charges?session_id={CHECKOUT_SESSION_ID}",
-        cancel_url: root_url + 'charges'
-      )
-    when "5"
-      @session = Stripe::Checkout::Session.create(
-        payment_method_types: ['card'],
-        line_items: [
-          {
-            price: 'price_1GsQ57HzEmLLomVZ0vpvDEZj',
-            quantity: 1
-          }
-        ],
-        mode: 'payment',
-        success_url: root_url + "charges?session_id={CHECKOUT_SESSION_ID}",
-        cancel_url: root_url + 'charges'
-      )
-    else
-      @session = nil
-    end
-  end
-
-  def edit
-  end
-
-  def create
-    @charge = Charge.new charge_params
-    @charge.user = current_user
-
-    customer = Stripe::Customer.create(
-      email: current_user.email,
-      source: params[:stripeToken]
-    )
-
-    charge = Stripe::Charge.create(
-      customer:       customer.id,
-      amount:         params[:amount],
-      description:    "「#{@room.name}」の決済",
-      currency:       'jpy',
-      receipt_email:  params[:stripeEmail],
-      metadata: {'仮払い' => "1回目"},
-      capture: false #capture:falseにすると仮払いで処理してくれる。
-    )
+    # end
     respond_to do |format|
-      if @charge.save
-        format.html { redirect_to @charge, notice: 'Charge was successfully created.' }
-      else
-        format.html { render :new }
-      end
+      format.xml { render head :ok } if charge.save
     end
   end
 
@@ -123,20 +64,8 @@ class ChargesController < ApplicationController
     end
   end
 
-  def success
-    
-  end
-
-  def cancel
-    
-  end
-
   private
-    def set_charge
-      @charge = Charge.find(params[:id])
-    end
-
     def charge_params
-      params.require(:charge).permit(:amount)
+      params.permit(:id, :amount)
     end
 end
