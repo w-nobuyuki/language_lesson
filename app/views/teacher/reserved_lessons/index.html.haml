@@ -8,7 +8,7 @@
   %tbody
     - @lessons.each do |lesson|
       %tr
-        %td= lesson.user.email
+        %td= lesson.user.name
         %td= h_lesson_datetime(lesson)
         %td= lesson.language.name
         %td= lesson.lesson_reservation.zoom_url

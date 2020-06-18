@@ -1,5 +1,5 @@
 下記の内容でレッスンの予約が行われました。
 
-予約ユーザー： <%= @lesson.user.email %>
+予約ユーザー： <%= @lesson.user.name %>
 予約時刻： <%= h_lesson_datetime(@lesson) %>
 zoom URL： <%= @lesson.lesson_reservation.zoom_url %>
