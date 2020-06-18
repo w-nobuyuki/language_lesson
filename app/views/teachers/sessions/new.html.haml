@@ -1,8 +1,7 @@
-%h2 Log in
-= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .form-inputs
-    = f.input :email, required: false,autofocus: true,input_html: { autocomplete: "email" }
-    = f.input :password, required: false, input_html: { autocomplete: "current-password" }
-    = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
-  .form-actions
-    = f.button :submit, "Log in"
+%h2.text-center 外国語レッスン（講師）
+.card
+  .card-body
+    = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      = f.input :email, required: false, autofocus: true
+      = f.input :password, required: false
+      = f.button :submit, 'ログイン', class: 'btn-outline-success'

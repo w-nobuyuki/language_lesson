@@ -2,7 +2,7 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title LanguageLesson
+    %title 外国語レッスン
     = csrf_meta_tags
     = csp_meta_tag
     %link{ rel: "stylesheet",
@@ -21,5 +21,20 @@
              integrity: "sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM",
              crossorigin: "anonymous" }
     %script{ src: 'https://js.stripe.com/v3/' }
-  %body
-    = yield
+  %body{style: 'padding-top: 5rem;'}
+    - if user_signed_in?
+      = render 'layouts/user_navbar'
+    - elsif teacher_signed_in?
+      = render 'layouts/teacher_navbar'
+    - elsif admin_signed_in?
+      = render 'layouts/admin_navbar'
+    .container
+      .row
+        .col
+          - flash.each do |key, value|
+            - type = key == 'notice' ? 'info' : 'danger'
+            %div{class: "alert alert-#{type}"}
+              = value
+              %button.close{type: 'button', data: {dismiss: 'alert'}, aria: {label: 'Close'}}
+                %span{aria: {hidden: 'true'}} &times;
+          = yield
