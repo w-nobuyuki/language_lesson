@@ -1,6 +1,6 @@
-%h1 Listing lesson_reservations
+%h1 予約済みレッスン
 
-%table
+%table.table.table-striped
   %thead
     %tr
       %th 講師
@@ -14,4 +14,5 @@
         %td= lesson_reservation.lesson.teacher.name
         %td= lesson_reservation.lesson.language.name
         %td= h_lesson_datetime(lesson_reservation.lesson)
-        %td= lesson_reservation.zoom_url
+        %td
+          %a{ href: lesson_reservation.zoom_url}= lesson_reservation.zoom_url
