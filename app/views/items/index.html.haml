@@ -1,0 +1,13 @@
+%h2 残チケット数
+%p= "残チケット数は #{current_user.lesson_tickets.count} 枚です。"
+
+%h2 チケット購入
+
+.row
+  - @items.each do |item|
+    .col-4
+      .card.text-center
+        .card-header= item.name
+        .card-body
+          %p.card-text= "#{item.amount} 円（税込）"
+          = link_to '購入', new_item_charge_path(item), remote: true, class: 'btn btn-block btn-primary'

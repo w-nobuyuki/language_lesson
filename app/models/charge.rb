@@ -1,21 +1,34 @@
 class Charge < ApplicationRecord
   belongs_to :user
+  belongs_to :item
   has_many :lesson_tickets
 
-  # TODO: amountは1,3,5のみ受け付けるようにする
+  validates :stripe_session_id, presence: true, uniqueness: true
 
-  def stripe_checkout_session(price:, root_url:)
+  def stripe_checkout_session(redirect_url:, user_id:)
     Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
       line_items: [
         {
-          price: price,
+          price_data: {
+            unit_amount: item.amount,
+            currency: 'jpy',
+            product_data: {
+              name: item.name,
+              description: item.description
+            }
+          },
           quantity: 1
         }
       ],
       mode: 'payment',
-      success_url: root_url + 'lesson_tickets?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: root_url + 'lesson_tickets'
+      success_url: redirect_url + '?session_id={CHECKOUT_SESSION_ID}',
+      cancel_url: redirect_url,
+      metadata: {
+        user_id: user_id,
+        quantity: item.quantity,
+        item_id: item.id
+      }
     )
   end
 end

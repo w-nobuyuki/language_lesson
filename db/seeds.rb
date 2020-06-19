@@ -30,9 +30,15 @@ unless Teacher.exists?
   teacher.save!
 end
 
+unless Item.exists?
+  Item.create(name: 'レッスンチケット（1枚）', description: '外国語レッスン1回分のチケットです', amount: '2180', quantity: 1)
+  Item.create(name: 'レッスンチケット（3枚）', description: '外国語レッスン3回分のチケットです', amount: '5400', quantity: 3)
+  Item.create(name: 'レッスンチケット（5枚）', description: '外国語レッスン5回分のチケットです', amount: '8100', quantity: 5)
+end
+
 unless User.exists?
-  user = User.create(email: 'user@tryout.com', password: 'password')
-  charge = Charge.new(stripe_session_id: 'dummy', stripe_payment_intent_id: 'dummy', user: user)
+  user = User.create(name: 'user', email: 'user@tryout.com', password: 'password')
+  charge = Charge.new(stripe_session_id: 'dummy', user: user, item: Item.first)
   3.times { charge.lesson_tickets.build }
   charge.save!
 end

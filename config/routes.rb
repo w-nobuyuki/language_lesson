@@ -16,9 +16,14 @@ Rails.application.routes.draw do
 
   root 'home#index'
   devise_for :users
-  resources :charges, only: %i[new create]
   resources :lessons, only: :index
-  resources :lesson_tickets, only: :index
+  resources :items, only: :index do
+    resources :charges, only: :new
+  end
   resources :lesson_reservations
+
+  namespace :webhook do
+    resources :charges, only: :create
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
