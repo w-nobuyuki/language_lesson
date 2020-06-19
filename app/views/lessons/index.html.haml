@@ -1,19 +1,15 @@
-= search_form_for @q do |f|
-  = f.label :teacher_name_eq
-  = f.collection_select :teacher_name_eq, Teacher.all, :name, :name, { include_blank: true }
-  %br/
-  = f.label :language_name_eq
-  = f.collection_select :language_name_eq, Language.all, :name, :name, { include_blank: true }
-  %br/
-  = f.label :start_at_gteq
-  = f.datetime_field :start_at_gteq, step: 3600
-  %br/
-  = f.label :start_at_lt
-  = f.datetime_field :start_at_lt, step: 3600
-  %br/
-  = f.submit
+= search_form_for @q,
+  wrapper: :horizontal_form,
+  wrapper_mappings: {datetime: :horizontal_form, } do |f|
+  = f.input :teacher_name_eq, collection: Teacher.all, label_method: :name, value_method: :name, required: false
+  = f.input :language_name_eq, collection: Language.all, label_method: :name, value_method: :name, required: false
+  = f.input :start_at_gteq, as: :datetime, required: false, html5: true
+  = f.input :start_at_lt, as: :datetime, required: false, html5: true
+  .form-group.row
+    .col-sm-9.offset-sm-3
+      = f.button :submit, class: "btn-outline-primary"
 
-%table
+%table.table.table-striped.mt-4
   %thead
     %tr
       %th 講師
@@ -29,4 +25,4 @@
         %td
           = form_for LessonReservation.new do |f|
             = f.hidden_field :lesson_id, value: lesson.id
-            = f.button '予約', data: { confirm: "予約を確定しますか？"}
+            = f.button '予約', data: { confirm: "予約を確定しますか？"}, class: 'btn btn-outline-success'

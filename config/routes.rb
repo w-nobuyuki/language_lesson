@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   resources :items, only: :index do
     resources :charges, only: :new
   end
-  resources :lesson_reservations
+  resources :lesson_reservations, only: %i[index create]
 
   namespace :webhook do
     resources :charges, only: :create
