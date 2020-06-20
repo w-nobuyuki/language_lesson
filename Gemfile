@@ -18,6 +18,7 @@ gem 'rails-i18n', '~> 6.0.0'
 gem 'ransack'
 gem 'sass-rails', '>= 6'
 gem 'simple_form'
+gem 'simple_form_fancy_uploads'
 gem 'stripe'
 gem 'turbolinks', '~> 5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

@@ -1,10 +1,6 @@
-= form_for @teacher, url: teacher_update_path do |f|
-  .form-group
-    = f.text_field :name
-  .form-group
-    = f.text_area :profile
-  .form-group
-    = f.file_field :avatar
-  .form-group
-    = f.collection_select :language_ids, @languages, :id, :name, { include_hidden: false }, { multiple: true }
-  = f.submit '更新する'
+= simple_form_for @teacher, url: teacher_update_path do |f|
+  = f.input :name
+  = f.input :profile, as: :text
+  = f.input :avatar, as: :image_preview, input_html: { preview_version: :thumb }
+  = f.input :language_ids, collection: @languages, label_method: :name, value_method: :id, input_html: { multiple: true }
+  = f.button :submit, '更新する', class: 'btn btn-outline-success'

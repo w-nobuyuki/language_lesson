@@ -1,4 +1,5 @@
-%table
+%h1 レッスン予定
+%table.table.table-striped
   %thead
     %tr
       %th ユーザー名
@@ -11,4 +12,5 @@
         %td= lesson.user.name
         %td= h_lesson_datetime(lesson)
         %td= lesson.language.name
-        %td= lesson.lesson_reservation.zoom_url
+        %td
+          %a{ href: lesson.lesson_reservation.zoom_url}= lesson.lesson_reservation.zoom_url
