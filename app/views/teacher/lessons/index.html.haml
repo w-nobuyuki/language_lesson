@@ -1,21 +1,21 @@
-%h1 Listing lessons
+%h1 レッスン枠一覧
 
-%table
+= link_to 'レッスン枠登録', new_teacher_lesson_path, class: 'btn btn-outline-primary'
+%table.table.table-striped.mt-3
   %thead
     %tr
-      %th Language
-      %th Start at
-      %th
+      %th 言語
+      %th 開始日時
       %th
 
   %tbody
     - @lessons.each do |lesson|
       %tr
         %td= lesson.language.name
-        %td= lesson.start_at
-        %td= link_to 'Edit', edit_teacher_lesson_path(lesson)
-        %td= link_to 'Destroy', [:teacher, lesson], method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Lesson', new_teacher_lesson_path
+        %td= h_lesson_datetime(lesson)
+        %td
+          - if lesson.lesson_reservation.present?
+            %p.badge.badge-success 予約済み
+          - else
+            = link_to '編集', edit_teacher_lesson_path(lesson), class: 'btn btn-outline-primary'
+            = link_to '削除', [:teacher, lesson], method: :delete, data: { confirm: '削除しますか？' }, class: 'btn btn-outline-danger'

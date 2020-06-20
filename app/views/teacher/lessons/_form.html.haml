@@ -1,16 +1,6 @@
-= form_for [:teacher, @lesson] do |f|
-  - if @lesson.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@lesson.errors.count, "error")} prohibited this lesson from being saved:"
-      %ul
-        - @lesson.errors.full_messages.each do |message|
-          %li= message
-
-  .field
-    = f.label :language
-    = f.collection_select :language_id, current_teacher.languages, :id, :name, {}
-  .field
-    = f.label :start_at
-    = f.datetime_field :start_at, step: 3600
-  .actions
-    = f.submit 'Save'
+= simple_form_for [:teacher, @lesson] do |f|
+  = f.error_notification
+  = f.input :language_id, collection: current_teacher.languages
+  = f.input :start_at, html5: true, input_html: { step: 3600 }, hint: '時間は7時～22時の間で入力してください。'
+  .form-group
+    = f.button :submit, class: 'btn btn-outline-success'

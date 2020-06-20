@@ -2,11 +2,9 @@ class Teacher::HomeController < Teacher::ApplicationController
   before_action :set_teacher, only: %i[edit update]
   before_action :set_languages, only: %i[edit update]
 
-  def index
-  end
+  def index; end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @teacher.update(teacher_params)
@@ -27,6 +25,6 @@ class Teacher::HomeController < Teacher::ApplicationController
   end
 
   def teacher_params
-    params.fetch(:teacher, {}).permit(:name, :profile, :avatar, language_ids: [])
+    params.require(:teacher).permit(:name, :profile, :avatar, language_ids: [])
   end
 end

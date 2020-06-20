@@ -2,8 +2,14 @@
   .container
     = link_to '外国語レッスン', teacher_root_path, class: 'navbar-brand'
     .collapse.navbar-collapse
+      %ul.navbar-nav.mr-auto
+        %li.nav-item
+          = link_to 'レッスン枠', teacher_lessons_path, class: "nav-link #{h_active(teacher_lessons_path)}"
+        %li.nav-item
+          = link_to 'レッスン予定', teacher_reserved_lessons_path, class: "nav-link #{h_active(teacher_reserved_lessons_path)}"
       %ul.navbar-nav.ml-auto
         %li.nav-item.dropdown
           %a#usermenu.nav-link.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}, aria: {haspopup: true, expanded: false}} メニュー
           .dropdown-menu.dropdown-menu-right{aria: {labelledby: 'usermenu'}}
+            = link_to 'プロフィール編集', teacher_edit_path, class: 'dropdown-item'
             = link_to 'ログアウト', destroy_teacher_session_path, method: :delete, class: 'dropdown-item'
