@@ -19,10 +19,14 @@
   %tbody
     - @lessons.each do |lesson|
       %tr
-        %td= lesson.teacher.name
-        %td= lesson.language.name
-        %td= h_lesson_datetime(lesson)
-        %td
+        %td.align-middle
+          - if lesson.teacher.avatar.present?
+            = link_to lesson.teacher.avatar.url do
+              = image_tag lesson.teacher.avatar.thumb.url, class: "img-thumbnail"
+          = lesson.teacher.name
+        %td.align-middle= lesson.language.name
+        %td.align-middle= h_lesson_datetime(lesson)
+        %td.align-middle
           = form_for LessonReservation.new do |f|
             = f.hidden_field :lesson_id, value: lesson.id
             = f.button '予約', data: { confirm: "予約を確定しますか？"}, class: 'btn btn-outline-success'

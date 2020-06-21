@@ -11,8 +11,12 @@
   %tbody
     - @lesson_reservations.each do |lesson_reservation|
       %tr
-        %td= lesson_reservation.lesson.teacher.name
-        %td= lesson_reservation.lesson.language.name
-        %td= h_lesson_datetime(lesson_reservation.lesson)
-        %td
+        %td.align-middle
+          - if lesson_reservation.lesson.teacher.avatar.present?
+            = link_to lesson_reservation.lesson.teacher.avatar.url do
+              = image_tag lesson_reservation.lesson.teacher.avatar.thumb.url, class: "img-thumbnail"
+          = lesson_reservation.lesson.teacher.name
+        %td.align-middle= lesson_reservation.lesson.language.name
+        %td.align-middle= h_lesson_datetime(lesson_reservation.lesson)
+        %td.align-middle
           %a{ href: lesson_reservation.zoom_url}= lesson_reservation.zoom_url
