@@ -1,5 +1,5 @@
 class Teacher < ApplicationRecord
-  has_many :supported_languages
+  has_many :supported_languages, dependent: :destroy
   has_many :languages, through: :supported_languages
   has_many :lessons
 

@@ -2,6 +2,9 @@
   .container
     = link_to '外国語レッスン', admin_root_path, class: 'navbar-brand'
     .collapse.navbar-collapse
+      %ul.navbar-nav.mr-auto
+        %li.nav-item
+          = link_to '講師管理', admin_teachers_path, class: "nav-link #{h_active(admin_teachers_path)}"
       %ul.navbar-nav.ml-auto
         %li.nav-item.dropdown
           %a#usermenu.nav-link.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}, aria: {haspopup: true, expanded: false}} メニュー

@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   devise_for :admins, only: %i[sessions]
   namespace :admin do
     root 'home#index'
-    resources :teachers
+    resources :teachers, only: %i[index new create edit update destroy] do
+      member do
+        get :login
+      end
+    end
   end
 
   devise_for :teachers, only: %i[sessions]

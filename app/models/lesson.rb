@@ -1,7 +1,7 @@
 class Lesson < ApplicationRecord
   belongs_to :teacher
   belongs_to :language
-  has_one :lesson_reservation
+  has_one :lesson_reservation, dependent: :destroy
   has_one :user, through: :lesson_reservation
 
   validates :start_at,

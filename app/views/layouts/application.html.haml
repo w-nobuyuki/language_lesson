@@ -9,12 +9,12 @@
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     %script{ src: 'https://js.stripe.com/v3/' }
   %body{style: 'padding-top: 5rem;'}
-    - if user_signed_in?
-      = render 'layouts/user_navbar'
-    - elsif teacher_signed_in?
+    - if teacher_signed_in? && request.url.include?(root_url + 'teacher')
       = render 'layouts/teacher_navbar'
-    - elsif admin_signed_in?
+    - elsif admin_signed_in? && request.url.include?(root_url + 'admin')
       = render 'layouts/admin_navbar'
+    - elsif user_signed_in?
+      = render 'layouts/user_navbar'
     .container
       .row
         .col

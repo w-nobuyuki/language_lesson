@@ -1,13 +1,11 @@
-%h1 Listing teachers
+%h1 講師一覧
 
-%table
+= link_to '講師登録', new_admin_teacher_path, class: 'btn btn-outline-primary'
+%table.table.table-striped.mt-3
   %thead
     %tr
-      %th Name
-      %th Email
-      %th
-      %th
-      %th
+      %th 氏名
+      %th メールアドレス
       %th
 
   %tbody
@@ -15,9 +13,7 @@
       %tr
         %td= teacher.name
         %td= teacher.email
-        %td= link_to 'Destroy', [:admin, teacher], method: :delete, data: { confirm: 'Are you sure?' }
-        %td= link_to '代理ログイン', [:admin, teacher]
-
-%br
-
-= link_to 'New Teacher', new_admin_teacher_path
+        %td
+          = link_to '編集', edit_admin_teacher_path(teacher), class: 'btn btn-outline-primary'
+          = link_to '代理ログイン', login_admin_teacher_path(teacher), class: 'btn btn-outline-primary'
+          = link_to '削除', [:admin, teacher], method: :delete, data: { confirm: '削除しますか？' }, class: 'btn btn-outline-danger'

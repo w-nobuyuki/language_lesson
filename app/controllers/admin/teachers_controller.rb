@@ -1,13 +1,8 @@
 class Admin::TeachersController < Admin::ApplicationController
-  before_action :set_teacher, only: %i[show edit update destroy]
+  before_action :set_teacher, only: %i[show edit update destroy login]
 
   def index
     @teachers = Teacher.all
-  end
-
-  def show
-    sign_in(:teacher, Teacher.find(params[:id]))
-    redirect_to teacher_root_url
   end
 
   def new
@@ -19,30 +14,29 @@ class Admin::TeachersController < Admin::ApplicationController
   def create
     @teacher = Teacher.new(teacher_params)
 
-    respond_to do |format|
-      if @teacher.save
-        format.html { redirect_to admin_teachers_url, notice: 'Teacher was successfully created.' }
-      else
-        format.html { render :new }
-      end
+    if @teacher.save
+      redirect_to admin_teachers_url, notice: '講師を登録しました。'
+    else
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @teacher.update(teacher_params)
-        format.html { redirect_to [:admin, @teacher], notice: 'Teacher was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+    if @teacher.update(teacher_params)
+      redirect_to admin_teachers_url, notice: '講師を更新しました。'
+    else
+      render :edit
     end
   end
 
   def destroy
     @teacher.destroy
-    respond_to do |format|
-      format.html { redirect_to admin_teachers_url, notice: 'Teacher was successfully destroyed.' }
-    end
+    redirect_to admin_teachers_url, notice: '講師を削除しました。'
+  end
+
+  def login
+    sign_in :teacher, @teacher
+    redirect_to teacher_root_url
   end
 
   private
@@ -52,6 +46,6 @@ class Admin::TeachersController < Admin::ApplicationController
   end
 
   def teacher_params
-    params.fetch(:teacher, {}).permit(:email, :password, :password_confirmation, :name)
+    params.require(:teacher).permit(:email, :password, :password_confirmation, :name)
   end
 end
