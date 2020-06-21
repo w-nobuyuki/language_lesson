@@ -5,7 +5,7 @@ class LessonReservationsController < ApplicationController
 
   def create
     if current_user.lesson_tickets.blank?
-      redirect_to charges_path, notice: 'レッスンの予約にはチケットの購入が必要です'
+      redirect_to items_path, notice: 'レッスンの予約にはチケットの購入が必要です'
       return
     end
     @lesson_reservation = current_user.lesson_reservations.new_with_zoom_url(lesson_reservation_params)
