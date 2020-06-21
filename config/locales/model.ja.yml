@@ -1,0 +1,31 @@
+ja:
+  activerecord:
+    models:
+      admin: 管理者
+      charge: 購入
+      item: 商品
+      language: 言語
+      lesson: レッスン
+      lesson_reservation: レッスン予約
+      lesson_ticket: チケット
+      supported_language: 対応言語
+      teacher: 講師
+      user: ユーザー
+    attributes:
+      admin:
+        name: ユーザー名
+        password: パスワード
+        password_confirmation: パスワード確認
+        current_password: 現在のパスワード
+        profile: プロフィール
+        blog_url: ブログURL
+      user:
+        name: ユーザー名
+        password: パスワード
+        password_confirmation: パスワード確認
+        current_password: 現在のパスワード
+        profile: プロフィール
+        blog_url: ブログURL
+      tweet:
+        body: 本文
+        images: 画像
