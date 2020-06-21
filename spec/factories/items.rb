@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :item do
-    name { "MyString" }
-    description { "MyString" }
-    amount { 1 }
+    name { "レッスンチケット" }
+    description { "レッスンチケットの購入券です" }
+    amount { 2160 }
     quantity { 1 }
   end
 end

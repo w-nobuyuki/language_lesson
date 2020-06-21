@@ -11,4 +11,10 @@ RSpec.describe Language, type: :model do
     language.valid?
     expect(language.errors[:name]).to include 'は20文字以内で入力してください'
   end
+
+  it 'はnameの長さが20文字の場合登録できること' do
+    language = Language.new(name: Faker::Lorem.characters(number: 20))
+    language.valid?
+    expect(language.errors[:name]).to eq []
+  end
 end

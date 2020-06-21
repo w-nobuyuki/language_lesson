@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :charge do
-    user { nil }
-    amount { 1 }
+    association :user
+    association :item
+    stripe_session_id { 'stripe-session-id' }
   end
 end

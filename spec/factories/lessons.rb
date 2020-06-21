@@ -1,6 +1,13 @@
 FactoryBot.define do
   factory :lesson do
-    teacher { nil }
-    start_at { "2020-05-31 18:41:05" }
+    association :teacher
+    association :language
+    start_at { Date.tomorrow.strftime('%Y/%m/%d 12:00') }
+  end
+
+  factory :lesson2, class: Lesson do
+    association :teacher, factory: :teacher2
+    association :language
+    start_at { Date.tomorrow.strftime('%Y/%m/%d 12:00') }
   end
 end

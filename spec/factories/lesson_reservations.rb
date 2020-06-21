@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :lesson_reservation do
-    lesson { nil }
-    user { nil }
+    association :lesson
+    association :user
+    zoom_url { 'https://zoom.co.jp' }
   end
 end
