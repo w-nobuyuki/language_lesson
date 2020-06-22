@@ -1,6 +1,5 @@
 class Teacher::HomeController < Teacher::ApplicationController
   before_action :set_teacher, only: %i[edit update]
-  before_action :set_languages, only: %i[edit update]
 
   def index; end
 
@@ -8,6 +7,7 @@ class Teacher::HomeController < Teacher::ApplicationController
 
   def update
     if @teacher.update(teacher_params)
+      bypass_sign_in(@teacher)
       redirect_to teacher_root_path, notice: 'プロフィールを更新しました'
     else
       render :edit
@@ -20,11 +20,7 @@ class Teacher::HomeController < Teacher::ApplicationController
     @teacher = current_teacher
   end
 
-  def set_languages
-    @languages = Language.all
-  end
-
   def teacher_params
-    params.require(:teacher).permit(:name, :profile, :avatar, language_ids: [])
+    params.require(:teacher).permit(:name, :profile, :avatar, :password, :password_confirmation, language_ids: [])
   end
 end

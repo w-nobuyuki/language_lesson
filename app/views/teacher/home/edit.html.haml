@@ -1,6 +1,9 @@
 = simple_form_for @teacher, url: teacher_update_path do |f|
+  = f.error_notification
   = f.input :name
   = f.input :profile, as: :text
   = f.input :avatar, as: :image_preview, input_html: { preview_version: :thumb }
-  = f.input :language_ids, collection: @languages, label_method: :name, value_method: :id, input_html: { multiple: true }
+  = f.input :language_ids, collection: Language.all, label_method: :name, value_method: :id, input_html: { multiple: true }
+  = f.input :password, hint: '変更しない場合は空白にしてください', required: false
+  = f.input :password_confirmation, required: false
   = f.button :submit, '更新する', class: 'btn btn-outline-success'
