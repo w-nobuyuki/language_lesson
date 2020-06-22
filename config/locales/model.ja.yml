@@ -13,19 +13,43 @@ ja:
       user: ユーザー
     attributes:
       admin:
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード確認
+        current_password: 現在のパスワード
+      teacher:
         name: ユーザー名
+        email: メールアドレス
         password: パスワード
         password_confirmation: パスワード確認
         current_password: 現在のパスワード
         profile: プロフィール
-        blog_url: ブログURL
+        avatar: アバター
+        language_ids: 対応言語
       user:
         name: ユーザー名
+        email: メールアドレス
         password: パスワード
         password_confirmation: パスワード確認
         current_password: 現在のパスワード
-        profile: プロフィール
-        blog_url: ブログURL
-      tweet:
-        body: 本文
-        images: 画像
+      charge:
+        user: ユーザー
+        item: 商品
+        stripe_session_id: StripeセッションID
+      item:
+        name: 商品名
+        amount: 価格
+        quantity: 数量
+      language:
+        name: 言語名
+      lesson:
+        teacher: 講師
+        language: 言語
+        start_at: 開始日時
+      lesson_reservation:
+        lesson: レッスン
+        user: ユーザー
+        zoom_url: ZOOM URL
+      supported_language:
+        teacher: 講師
+        language: 言語

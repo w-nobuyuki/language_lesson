@@ -1,6 +1,6 @@
 = simple_form_for [:teacher, @lesson] do |f|
   = f.error_notification
-  = f.input :language_id, collection: current_teacher.languages
+  = f.association :language, collection: current_teacher.languages, required: true
   = f.input :start_at, html5: true, input_html: { step: 3600 }, hint: '時間は7時～22時の間で入力してください。'
   .form-group
     = f.button :submit, class: 'btn btn-outline-success'

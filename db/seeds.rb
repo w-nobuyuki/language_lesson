@@ -24,9 +24,9 @@ unless Teacher.exists?
   teacher.supported_languages.build(language_id: 1)
   teacher.supported_languages.build(language_id: 2)
   teacher.supported_languages.build(language_id: 3)
-  teacher.lessons.build(language_id: 1, start_at: "2020/6/13 8:00")
-  teacher.lessons.build(language_id: 2, start_at: "2020/7/13 9:00")
-  teacher.lessons.build(language_id: 2, start_at: "2020/7/13 10:00")
+  teacher.lessons.build(language_id: 1, start_at: Date.tomorrow.strftime('%Y/%m/%d 08:00:00'))
+  teacher.lessons.build(language_id: 2, start_at: Date.tomorrow.strftime('%Y/%m/%d 10:00:00'))
+  teacher.lessons.build(language_id: 2, start_at: Date.tomorrow.strftime('%Y/%m/%d 13:00:00'))
   teacher.save!
 end
 

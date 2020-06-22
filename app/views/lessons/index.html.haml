@@ -1,10 +1,17 @@
 = search_form_for @q,
   wrapper: :horizontal_form,
   wrapper_mappings: {datetime: :horizontal_form, } do |f|
-  = f.input :teacher_name_eq, collection: Teacher.all, label_method: :name, value_method: :name, required: false
-  = f.input :language_name_eq, collection: Language.all, label_method: :name, value_method: :name, required: false
-  = f.input :start_at_gteq, as: :datetime, required: false, html5: true
-  = f.input :start_at_lt, as: :datetime, required: false, html5: true
+  = f.input :teacher_name_eq, collection: Teacher.all, label_method: :name, value_method: :name, required: false, label: '講師'
+  = f.input :language_name_eq, collection: Language.all, label_method: :name, value_method: :name, required: false, label: '言語'
+  .form-group.row
+    .col-sm-3.col-form-label
+      = f.label '開始日時'
+    .col-sm
+      = f.datetime_field :start_at_gteq, class: 'form-control'
+    .col-form-label
+      ～
+    .col-sm
+      = f.datetime_field :start_at_lteq, class: 'form-control'
   .form-group.row
     .col-sm-9.offset-sm-3
       = f.button :submit, class: "btn-outline-primary"
