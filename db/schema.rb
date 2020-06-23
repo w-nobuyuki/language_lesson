@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_23_043154) do
+ActiveRecord::Schema.define(version: 2020_06_23_085616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,14 @@ ActiveRecord::Schema.define(version: 2020_06_23_043154) do
     t.bigint "item_id", null: false
     t.index ["item_id"], name: "index_charges_on_item_id"
     t.index ["user_id"], name: "index_charges_on_user_id"
+  end
+
+  create_table "feedbacks", force: :cascade do |t|
+    t.bigint "lesson_reservation_id", null: false
+    t.text "body", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["lesson_reservation_id"], name: "index_feedbacks_on_lesson_reservation_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -82,6 +90,14 @@ ActiveRecord::Schema.define(version: 2020_06_23_043154) do
     t.index ["teacher_id"], name: "index_lessons_on_teacher_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "lesson_reservation_id", null: false
+    t.text "body", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["lesson_reservation_id"], name: "index_notifications_on_lesson_reservation_id"
+  end
+
   create_table "supported_languages", force: :cascade do |t|
     t.bigint "teacher_id", null: false
     t.bigint "language_id", null: false
@@ -121,12 +137,14 @@ ActiveRecord::Schema.define(version: 2020_06_23_043154) do
 
   add_foreign_key "charges", "items"
   add_foreign_key "charges", "users"
+  add_foreign_key "feedbacks", "lesson_reservations"
   add_foreign_key "lesson_reservations", "lessons"
   add_foreign_key "lesson_reservations", "users"
   add_foreign_key "lesson_tickets", "charges"
   add_foreign_key "lesson_tickets", "users"
   add_foreign_key "lessons", "languages"
   add_foreign_key "lessons", "teachers"
+  add_foreign_key "notifications", "lesson_reservations"
   add_foreign_key "supported_languages", "languages"
   add_foreign_key "supported_languages", "teachers"
 end
