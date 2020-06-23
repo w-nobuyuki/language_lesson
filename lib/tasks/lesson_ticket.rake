@@ -5,4 +5,10 @@ namespace :lesson_ticket do
       lesson_ticket.update(user_id: lesson_ticket.charge.user.id)
     end
   end
+
+  task distributes: :environment do
+    User.all.each do |user|
+      user.lesson_tickets.create
+    end
+  end
 end

@@ -19,7 +19,9 @@ Rails.application.routes.draw do
   end
 
   root 'home#index'
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
   resources :lessons, only: :index
   resources :items, only: :index do
     resources :charges, only: :new

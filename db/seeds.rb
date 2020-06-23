@@ -37,8 +37,7 @@ unless Item.exists?
 end
 
 unless User.exists?
-  user = User.create(name: 'user', email: 'user@tryout.com', password: 'password')
-  charge = Charge.new(stripe_session_id: 'dummy', user: user, item: Item.first)
-  3.times { charge.lesson_tickets.build }
-  charge.save!
+  user = User.new(name: 'user', email: 'user@tryout.com', password: 'password')
+  3.times { user.lesson_tickets.build }
+  user.save!
 end

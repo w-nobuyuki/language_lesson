@@ -8,7 +8,9 @@ class Webhook::ChargesController < Webhook::ApplicationController
       user_id: session[:metadata][:user_id],
       item_id: session[:metadata][:item_id]
     )
-    charge.item.quantity.times { charge.lesson_tickets.build }
+    charge.item.quantity.times {
+      charge.lesson_tickets.build(user_id: session[:metadata][:user_id])
+    }
     if charge.save
       head :created
     else
