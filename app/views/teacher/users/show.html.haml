@@ -1,0 +1,21 @@
+%h1= @user.name + 'レッスン履歴'
+
+%table.table.table-striped
+  %thead
+    %th 言語
+    %th 受講日時
+    %th 講師
+    %th 申し送り事項
+  %tbody
+    - @user.lesson_reservations.only_completed.each do |lesson_reservation|
+      %tr
+        %td= lesson_reservation.lesson.language.name
+        %td= h_lesson_datetime(lesson_reservation.lesson)
+        %td= lesson_reservation.lesson.teacher.name
+        %td
+          - lesson_reservation.notifications.each.with_index do |notification, index|
+            - unless index.zero?
+              %hr/
+            = raw h(notification.body).gsub(/\R/, '<br>')
+
+= link_to '戻る', teacher_lesson_reservations_path, class: 'btn btn-outline-secondary'

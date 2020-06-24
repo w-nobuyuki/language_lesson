@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       resources :feedbacks
       resources :notifications
     end
+    resources :users, only: :show
   end
 
   root 'home#index'

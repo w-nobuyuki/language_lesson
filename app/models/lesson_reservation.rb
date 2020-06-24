@@ -7,7 +7,7 @@ class LessonReservation < ApplicationRecord
   validates :zoom_url, presence: true
   validate :cannot_reserve_same_datetime
 
-  scope :only_completed, -> { includes(:lesson).where('lessons.start_at < ?', Time.now)}
+  scope :only_completed, -> { joins(:lesson).where('lessons.start_at < ?', Time.now)}
 
   def self.new_with_zoom_url(*args)
     lesson_reservation = new(*args)

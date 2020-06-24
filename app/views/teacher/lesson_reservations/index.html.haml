@@ -10,7 +10,8 @@
   %tbody
     - @lesson_reservations.each do |lesson_reservation|
       %tr
-        %td= lesson_reservation.lesson.user.name
+        %td
+          = link_to lesson_reservation.lesson.user.name, teacher_user_path(lesson_reservation.lesson.user)
         %td= h_lesson_datetime(lesson_reservation.lesson)
         %td= lesson_reservation.lesson.language.name
         %td
