@@ -11,6 +11,10 @@ class Lesson < ApplicationRecord
 
   validate :cannot_past_datetime
 
+  scope :only_reservable, lambda {
+    includes(:lesson_reservation).where(lesson_reservations: { id: nil }, start_at: Time.now + 3600..)
+  }
+
   def end_at
     start_at + 3000
   end
