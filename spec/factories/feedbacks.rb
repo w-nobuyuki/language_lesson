@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :feedback do
-    lesson_reservation { nil }
-    body { "MyText" }
+    association :lesson_reservation
+    body { "フィードバック内容です" }
   end
 end

@@ -1,0 +1,8 @@
+下記レッスンのフィードバックが登録されました。
+
+担当講師： <%= @feedback.lesson_reservation.lesson.teacher.name %>
+言語　　： <%= @feedback.lesson_reservation.lesson.language.name %>
+受講日時： <%= h_lesson_datetime(@feedback.lesson_reservation.lesson) %>
+
+■フィードバック内容
+<%= @feedback.body %>

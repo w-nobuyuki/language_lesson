@@ -1,5 +1,4 @@
 class LessonMailer < ApplicationMailer
-  add_template_helper(LessonHelper)
   def notice_user(lesson)
     @lesson = lesson
     mail to: lesson.user.email, subject: '【tryout】レッスンの予約が完了しました'

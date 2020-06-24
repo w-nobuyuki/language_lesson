@@ -1,5 +1,5 @@
-# Preview all emails at http://localhost:3000/rails/mailers/lessons
-class LessonsPreview < ActionMailer::Preview
+# Preview all emails at http://localhost:3000/rails/mailers/lesson
+class LessonPreview < ActionMailer::Preview
   def notice_user
     lesson = Lesson.joins(:lesson_reservation).first
     LessonMailer.notice_user(lesson)

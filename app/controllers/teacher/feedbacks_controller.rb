@@ -13,6 +13,7 @@ class Teacher::FeedbacksController < Teacher::ApplicationController
   def create
     @feedback = @lesson_reservation.feedbacks.build(feedback_params)
     if @feedback.save
+      FeedbackMailer.new_feedback(@feedback).deliver_now
       redirect_to teacher_lesson_reservation_feedbacks_url, notice: 'フィードバックを登録しました。'
     else
       render :new
