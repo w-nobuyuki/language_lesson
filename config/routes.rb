@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # namespace の命名と揃えたほうがコードの見通しはよくなりそう
   devise_for :admins, only: %i[sessions]
   namespace :admin do
     root 'home#index'
@@ -14,6 +15,7 @@ Rails.application.routes.draw do
     root 'home#index'
     get 'edit', to: 'home#edit'
     patch 'update', to: 'home#update'
+    # resource :profile, only: %i[edit update] といった具合に別リソースにしたほうがよさそう
     resources :lessons, only: %i[index new create edit update destroy]
     resources :lesson_reservations, only: %i[index] do
       resources :feedbacks, only: %i[index new create edit update destroy]
@@ -37,5 +39,6 @@ Rails.application.routes.draw do
   namespace :webhook do
     resources :charges, only: :create
   end
+  # ↓コメント消す
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

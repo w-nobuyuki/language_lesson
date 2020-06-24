@@ -7,7 +7,7 @@ class Teacher::HomeController < Teacher::ApplicationController
 
   def update
     if @teacher.update(teacher_params)
-      bypass_sign_in(@teacher)
+      bypass_sign_in(@teacher) # コメントが欲しい
       redirect_to teacher_root_path, notice: 'プロフィールを更新しました'
     else
       render :edit

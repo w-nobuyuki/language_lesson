@@ -9,9 +9,11 @@ class LessonReservationsController < ApplicationController
       return
     end
     @lesson_reservation = current_user.lesson_reservations.new_with_zoom_url(lesson_reservation_params)
+    @lesson_reservation = current_user.lesson_reservations.build(lesson_reservation_params)
+    # @lesson_reservation.new_zoom_url
 
     respond_to do |format|
-      if @lesson_reservation.save
+      if @lesson_reservation.do_reserve
         current_user.lesson_tickets.first.destroy!
         LessonMailer.notice_user(@lesson_reservation.lesson).deliver_now
         LessonMailer.notice_teacher(@lesson_reservation.lesson).deliver_now
