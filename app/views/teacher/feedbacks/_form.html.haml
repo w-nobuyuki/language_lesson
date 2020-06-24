@@ -1,0 +1,4 @@
+= simple_form_for [:teacher, @lesson_reservation, @feedback] do |f|
+  = f.error_notification
+  = f.input :body, required: true, hint: '最大300文字まで'
+  = f.button :submit, class: 'btn btn-outline-success'

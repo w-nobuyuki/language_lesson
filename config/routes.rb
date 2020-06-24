@@ -15,7 +15,9 @@ Rails.application.routes.draw do
     get 'edit', to: 'home#edit'
     patch 'update', to: 'home#update'
     resources :lessons, only: %i[index new create edit update destroy]
-    resources :reserved_lessons, only: %i[index]
+    resources :lesson_reservations, only: %i[index] do
+      resources :feedbacks
+    end
   end
 
   root 'home#index'

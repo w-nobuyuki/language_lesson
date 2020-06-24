@@ -53,3 +53,7 @@ ja:
       supported_language:
         teacher: 講師
         language: 言語
+      feedback:
+        body: 内容
+      notification:
+        body: 内容

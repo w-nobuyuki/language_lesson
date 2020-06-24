@@ -1,9 +1,12 @@
 class LessonReservation < ApplicationRecord
   belongs_to :lesson
   belongs_to :user
+  has_many :feedbacks
 
   validates :zoom_url, presence: true
   validate :cannot_reserve_same_datetime
+
+  scope :only_completed, -> { includes(:lesson).where('lessons.start_at < ?', Time.now)}
 
   def self.new_with_zoom_url(*args)
     lesson_reservation = new(*args)

@@ -6,7 +6,7 @@
         %li.nav-item
           = link_to 'レッスン枠', teacher_lessons_path, class: "nav-link #{h_active(teacher_lessons_path)}"
         %li.nav-item
-          = link_to '予約済みレッスン', teacher_reserved_lessons_path, class: "nav-link #{h_active(teacher_reserved_lessons_path)}"
+          = link_to '予約済みレッスン', teacher_lesson_reservations_path, class: "nav-link #{h_active(teacher_lesson_reservations_path)}"
       %ul.navbar-nav.ml-auto
         %li.nav-item.dropdown
           %a#usermenu.nav-link.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}, aria: {haspopup: true, expanded: false}} メニュー
