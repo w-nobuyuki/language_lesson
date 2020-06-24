@@ -30,7 +30,7 @@ class Teacher::NotificationsController < Teacher::ApplicationController
   end
 
   def destroy
-    @notification.destroy
+    @notification.destroy!
     redirect_to teacher_lesson_reservation_notifications_url, notice: '申し送り事項を削除しました。'
   end
 

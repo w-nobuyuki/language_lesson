@@ -14,30 +14,24 @@ class Teacher::LessonsController < Teacher::ApplicationController
   def create
     @lesson = current_teacher.lessons.build(lesson_params)
 
-    respond_to do |format|
-      if @lesson.save
-        format.html { redirect_to teacher_lessons_url, notice: 'レッスン枠を登録しました。' }
-      else
-        format.html { render :new }
-      end
+    if @lesson.save
+      redirect_to teacher_lessons_url, notice: 'レッスン枠を登録しました。'
+    else
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @lesson.update(lesson_params)
-        format.html { redirect_to teacher_lessons_url, notice: 'レッスン枠を更新しました。' }
-      else
-        format.html { render :edit }
-      end
+    if @lesson.update(lesson_params)
+      redirect_to teacher_lessons_url, notice: 'レッスン枠を更新しました。'
+    else
+      render :edit
     end
   end
 
   def destroy
-    @lesson.destroy
-    respond_to do |format|
-      format.html { redirect_to teacher_lessons_url, notice: 'レッスン枠を削除しました。' }
-    end
+    @lesson.destroy!
+    redirect_to teacher_lessons_url, notice: 'レッスン枠を削除しました。'
   end
 
   private

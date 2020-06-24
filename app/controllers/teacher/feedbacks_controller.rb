@@ -31,7 +31,7 @@ class Teacher::FeedbacksController < Teacher::ApplicationController
   end
 
   def destroy
-    @feedback.destroy
+    @feedback.destroy!
     redirect_to teacher_lesson_reservation_feedbacks_url, notice: 'フィードバックを削除しました。'
   end
 

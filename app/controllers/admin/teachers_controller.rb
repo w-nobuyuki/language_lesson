@@ -30,7 +30,7 @@ class Admin::TeachersController < Admin::ApplicationController
   end
 
   def destroy
-    @teacher.destroy
+    @teacher.destroy!
     redirect_to admin_teachers_url, notice: '講師を削除しました。'
   end
 
