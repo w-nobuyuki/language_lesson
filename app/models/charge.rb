@@ -31,4 +31,19 @@ class Charge < ApplicationRecord
       }
     )
   end
+
+  # class << self
+  #   def new_with_session(session_id)
+  #     session = Stripe::Checkout::Session.retrieve(session_id)
+  #     charge = Charge.new(
+  #       stripe_session_id: session[:id],
+  #       user_id: session[:metadata][:user_id],
+  #       item_id: session[:metadata][:item_id]
+  #     )
+  #     charge.item.quantity.times {
+  #       charge.lesson_tickets.build(user_id: session[:metadata][:user_id])
+  #     }
+  #     charge
+  #   end
+  # end
 end

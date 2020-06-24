@@ -2,6 +2,7 @@ class Admin::TeachersController < Admin::ApplicationController
   before_action :set_teacher, only: %i[show edit update destroy login]
 
   def index
+    # 何か順番を指定したほうがよい
     @teachers = Teacher.all
   end
 

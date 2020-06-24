@@ -17,5 +17,7 @@
             - unless index.zero?
               %hr/
             = raw h(notification.body).gsub(/\R/, '<br>')
+            -# = simple_format(notification.body)
+            -# https://developer.mozilla.org/ja/docs/Web/CSS/white-space
 
 = link_to '戻る', teacher_lesson_reservations_path, class: 'btn btn-outline-secondary'

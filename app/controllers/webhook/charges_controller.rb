@@ -2,6 +2,7 @@ class Webhook::ChargesController < Webhook::ApplicationController
   protect_from_forgery except: :create
 
   def create
+    # データを扱う処理はなるべくモデルへ寄せる
     session = Stripe::Checkout::Session.retrieve(params[:data][:object][:id])
     charge = Charge.new(
       stripe_session_id: session[:id],

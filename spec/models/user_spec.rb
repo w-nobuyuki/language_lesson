@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+# rspec-parameterized gem
 RSpec.describe User, type: :model do
   it 'はemail, name, passwordが存在すればアカウントを登録できること' do
     user = User.new(email: 'test@sample.co.jp', name: 'user', password: 'password')

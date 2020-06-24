@@ -1,7 +1,9 @@
 class Teacher::LessonsController < Teacher::ApplicationController
-  before_action :set_lesson, only: %i[edit update destroy]
+  before_action :set_lesson, only: %i[show edit update destroy]
+  before_action :require_editable, only: %i[edit update destroy]
 
   def index
+    # order を指定
     @lessons = current_teacher.lessons
   end
 
@@ -37,9 +39,18 @@ class Teacher::LessonsController < Teacher::ApplicationController
   private
 
   def set_lesson
-    @lesson = current_teacher.lessons.includes(:lesson_reservation)
-                             .where(lesson_reservations: { id: nil })
-                             .find(params[:id])
+    # - 事前条件のチェックは分けたほうがコードの再利用性が高まる
+    # - ドメインロジックには名前つけて、モデルに定義
+    # @lesson = current_teacher.lessons.includes(:lesson_reservation)
+    #                          .where(lesson_reservations: { id: nil })
+    #                          .find(params[:id])
+    @lesson = current_teacher.lessons.find(params[:id])
+  end
+
+  def require_editable
+    unless @lesson.editable?
+      head 404
+    end
   end
 
   def lesson_params
