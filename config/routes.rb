@@ -16,16 +16,18 @@ Rails.application.routes.draw do
     patch 'update', to: 'home#update'
     resources :lessons, only: %i[index new create edit update destroy]
     resources :lesson_reservations, only: %i[index] do
-      resources :feedbacks
-      resources :notifications
+      resources :feedbacks, only: %i[index new create edit update destroy]
+      resources :notifications, only: %i[index new create edit update destroy]
     end
     resources :users, only: :show
   end
 
   root 'home#index'
-  devise_for :users, controllers: {
-    registrations: 'users/registrations'
-  }
+  devise_for :users, only: %i[sessions]
+  as :user do
+    get '/users/sign_up' => 'users/registrations#new', as: :new_user_registration
+    post '/users' => 'users/registrations#create', as: :user_registration
+  end
   resources :lessons, only: :index
   resources :items, only: :index do
     resources :charges, only: :new
