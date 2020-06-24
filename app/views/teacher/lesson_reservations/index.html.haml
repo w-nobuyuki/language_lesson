@@ -18,4 +18,4 @@
         %td
           - if lesson_reservation.lesson.end_at < Time.now
             = link_to 'フィードバック', teacher_lesson_reservation_feedbacks_path(lesson_reservation), class: 'btn btn-outline-primary'
-            = link_to '申し送り', '#', class: 'btn btn-outline-primary'
+            = link_to '申し送り', teacher_lesson_reservation_notifications_path(lesson_reservation), class: 'btn btn-outline-primary'

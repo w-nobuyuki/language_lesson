@@ -2,6 +2,7 @@ class LessonReservation < ApplicationRecord
   belongs_to :lesson
   belongs_to :user
   has_many :feedbacks
+  has_many :notifications
 
   validates :zoom_url, presence: true
   validate :cannot_reserve_same_datetime

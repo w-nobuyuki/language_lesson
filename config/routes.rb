@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :lessons, only: %i[index new create edit update destroy]
     resources :lesson_reservations, only: %i[index] do
       resources :feedbacks
+      resources :notifications
     end
   end
 
