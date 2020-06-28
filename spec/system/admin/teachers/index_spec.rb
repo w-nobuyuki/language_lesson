@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Admin::Teachers#index', type: :system do
+RSpec.describe 'Admin::Teachers#index', type: :system, js: true do
   let!(:admin) { create(:admin) }
   let!(:teacher) { create(:teacher) }
   before do
@@ -27,11 +27,19 @@ RSpec.describe 'Admin::Teachers#index', type: :system do
   end
 
   it '削除をクリックするとその講師が削除されること' do
-    click_link '削除'
+    accept_confirm do
+      click_link '削除'
+    end
     expect(page).to have_content '講師を削除しました。'
   end
 
-  # TODO: 講師が削除できないパターンの追加
+  it '講師が実施済みのレッスンを持っている場合講師を削除できないこと' do
+    lesson = create(:lesson, teacher: teacher)
+    create(:lesson_reservation, lesson: lesson)
+    visit admin_teachers_path
+    expect(page).to have_button('削除', disabled: true)
+  end
+
   it 'テーブルのヘッダに氏名とメールアドレスが存在すること' do
     within 'thead' do
       ths = all('th').map(&:text)
