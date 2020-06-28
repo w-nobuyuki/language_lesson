@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe SupportedLanguage, type: :model do
   let(:teacher) { create(:teacher) }
-  let(:language) { create(:language) }
+  let(:language) { create(:english) }
   it 'はteacherとlanguageが存在すれば登録できること' do
     supported_language = SupportedLanguage.new(teacher: teacher, language: language)
     expect(supported_language).to be_valid

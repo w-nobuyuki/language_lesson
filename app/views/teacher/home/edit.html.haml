@@ -6,4 +6,5 @@
   = f.input :language_ids, collection: Language.all, label_method: :name, value_method: :id, input_html: { multiple: true }
   = f.input :password, hint: '変更しない場合は空白にしてください', required: false
   = f.input :password_confirmation, required: false
+  = f.input :current_password, required: true, hint: '変更を確定するには現在のパスワードが必要です'
   = f.button :submit, '更新する', class: 'btn btn-outline-success'

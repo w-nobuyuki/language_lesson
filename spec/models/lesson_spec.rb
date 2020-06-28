@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Lesson, type: :model do
   let(:teacher) { create(:teacher) }
-  let(:language) { create(:language) }
+  let(:language) { create(:english) }
   it 'は講師、言語、開始日時が存在すれば登録できること' do
     lesson = Lesson.new(teacher: teacher, language: language, start_at: '2100/01/01 12:00')
     expect(lesson).to be_valid
