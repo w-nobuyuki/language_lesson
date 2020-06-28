@@ -15,6 +15,10 @@ RSpec.describe 'Admin::Home#index', type: :system do
     click_link '外国語レッスン'
     expect(current_path).to eq admin_root_path
   end
+  it 'ヘッダーの講師管理をクリックすると講師一覧画面へ画面遷移すること' do
+    click_link '講師管理'
+    expect(current_path).to eq admin_teachers_path
+  end
   it 'メニューのログアウトをクリックすると管理者がログアウトすること' do
     click_link 'メニュー'
     click_link 'ログアウト'
