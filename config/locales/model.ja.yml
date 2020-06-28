@@ -46,6 +46,7 @@ ja:
         teacher: 講師
         language: 言語
         start_at: 開始日時
+        lesson_reservation: レッスン予約
       lesson_reservation:
         lesson: レッスン
         user: ユーザー
