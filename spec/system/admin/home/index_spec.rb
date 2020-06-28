@@ -11,4 +11,13 @@ RSpec.describe 'Admin::Home#index', type: :system do
   it 'トップページの文言が表示されていること' do
     expect(page).to have_content '外国語レッスンの管理者用ページです。'
   end
+  it 'ヘッダーのタイトルをクリックすると管理者のトップページに画面遷移すること' do
+    click_link '外国語レッスン'
+    expect(current_path).to eq admin_root_path
+  end
+  it 'メニューのログアウトをクリックすると管理者がログアウトすること' do
+    click_link 'メニュー'
+    click_link 'ログアウト'
+    expect(page).to have_content 'ログアウトしました。'
+  end
 end
