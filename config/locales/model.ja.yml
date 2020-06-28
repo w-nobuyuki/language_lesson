@@ -18,7 +18,7 @@ ja:
         password_confirmation: パスワード確認
         current_password: 現在のパスワード
       teacher:
-        name: ユーザー名
+        name: 講師名
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード確認
