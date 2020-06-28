@@ -12,4 +12,8 @@ class Teacher < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :name, presence: true, length: { maximum: 20 }
+
+  def destroyable?
+    lesson_reservations.present? ? false : true
+  end
 end
