@@ -16,8 +16,15 @@ require("channels")
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-import jquery from 'jquery'
-window.$ = jquery
+import $ from 'jquery'
 import 'bootstrap'
+import 'bootstrap/js/dist/util'
+import 'bootstrap/js/dist/alert'
 import '@fortawesome/fontawesome-free/js/all'
 import '../stylesheets/application.scss'
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
+window.$ = $

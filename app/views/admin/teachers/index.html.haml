@@ -16,4 +16,8 @@
         %td
           = link_to '編集', edit_admin_teacher_path(teacher), class: 'btn btn-outline-primary'
           = link_to '代理ログイン', login_admin_teacher_path(teacher), class: 'btn btn-outline-primary'
-          = link_to '削除', [:admin, teacher], method: :delete, data: { confirm: '削除しますか？' }, class: 'btn btn-outline-danger'
+          - if teacher.destroyable?
+            = link_to '削除', [:admin, teacher], method: :delete, data: { confirm: '削除しますか？' }, class: 'btn btn-outline-danger'
+          - else
+            %span.d-inline-block{ tabindex: 0, data: { toggle: 'tooltip', title: '実施済みのレッスンが存在するため削除できません' }}
+              %button.btn.btn-secondary{ disabled: '', style: 'pointer-events:none;' } 削除
