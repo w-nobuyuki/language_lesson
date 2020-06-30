@@ -22,6 +22,10 @@ class Admin::TeachersController < Admin::ApplicationController
   end
 
   def update
+    if params[:teacher][:password].blank? && params[:teacher][:password_confirmation].blank?
+      params[:teacher].delete(:password)
+      params[:teacher].delete(:password_confirmation)
+    end
     if @teacher.update(teacher_params)
       redirect_to admin_teachers_url, notice: '講師を更新しました。'
     else
