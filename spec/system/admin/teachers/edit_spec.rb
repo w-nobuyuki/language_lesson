@@ -11,15 +11,24 @@ RSpec.describe 'Admin::Teachers#edit', type: :system do
     visit edit_admin_teacher_path(teacher)
   end
 
-  it 'メールアドレス、ユーザー名、パスワード、パスワード確認を入力して更新するを押すと一覧画面に画面遷移すること' do
+  it 'パスワードとパスワード確認が空の状態で更新するを押すと一覧画面に画面遷移すること' do
     click_button '更新する'
     expect(current_path).to eq admin_teachers_path
   end
-  it 'メールアドレス、ユーザー名、パスワード、パスワード確認を入力して更新するを押すとその講師が登録されること' do
+  it 'メールアドレスを変更して更新すると、変更が反映されていること' do
+    fill_in 'teacher[email]',	with: 'teacher2@tryout.com'
     click_button '更新する'
     within 'tbody' do
       tds = all('td').map(&:text)
-      expect(tds[0..1]).to eq %w[teacher teacher@tryout.com]
+      expect(tds[1]).to eq 'teacher2@tryout.com'
+    end
+  end
+  it '講師名を変更して更新すると、変更が反映されていること' do
+    fill_in 'teacher[name]',	with: 'teacher2'
+    click_button '更新する'
+    within 'tbody' do
+      tds = all('td').map(&:text)
+      expect(tds[0]).to eq 'teacher2'
     end
   end
   it 'メールアドレスが空だと更新できないこと' do
@@ -31,11 +40,6 @@ RSpec.describe 'Admin::Teachers#edit', type: :system do
     fill_in 'teacher[name]', with: ''
     click_button '更新する'
     expect(page).to have_content '講師名を入力してください'
-  end
-  it 'パスワードが空だと更新できないこと' do
-    fill_in 'teacher[password]', with: ''
-    click_button '更新する'
-    expect(page).to have_content 'パスワードを入力してください'
   end
   it 'パスワードとパスワード確認が一致しないと更新できないこと' do
     fill_in 'teacher[password]', with: 'password2'
