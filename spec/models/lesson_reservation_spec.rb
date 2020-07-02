@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe LessonReservation, type: :model do
-  let(:lesson) { create(:lesson) }
+  let(:lesson) { create(:teacher_english_lesson) }
   let(:user) { create(:user) }
   it 'はレッスン、ユーザー、zoom URLが存在すれば登録できること' do
     lesson_reservation = LessonReservation.new(user: user, lesson: lesson, zoom_url: 'https://zoom.co.jp')
@@ -24,7 +24,7 @@ RSpec.describe LessonReservation, type: :model do
   end
   it 'は同じユーザーが同じ時間のレッスンを予約できないこと' do
     LessonReservation.create(user: user, lesson: lesson, zoom_url: 'https://zoom.co.jp')
-    lesson2 = create(:lesson2)
+    lesson2 = create(:teacher2_english_lesson)
     lesson_reservation = LessonReservation.new(user: user, lesson: lesson2)
     lesson_reservation.valid?
     expect(lesson_reservation.errors[:base]).to include('その日時は他のレッスンを予約済みです')

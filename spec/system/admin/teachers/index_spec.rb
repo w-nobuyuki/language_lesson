@@ -34,8 +34,8 @@ RSpec.describe 'Admin::Teachers#index', type: :system, js: true do
   end
 
   it '講師が実施済みのレッスンを持っている場合講師を削除できないこと' do
-    lesson = create(:lesson, teacher: teacher)
-    create(:lesson_reservation, lesson: lesson)
+    lesson = create(:teacher_english_lesson, teacher: teacher)
+    create(:teacher_english_lesson_reservation, lesson: lesson)
     visit admin_teachers_path
     expect(page).to have_button('削除', disabled: true)
   end

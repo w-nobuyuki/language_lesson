@@ -1,6 +1,11 @@
 FactoryBot.define do
-  factory :supported_language do
-    teacher { nil }
-    language { nil }
+  factory :teacher_supported_english, class: SupportedLanguage do
+    association :teacher
+    association :language, factory: :english
+  end
+
+  factory :teacher_supported_chinese, class: SupportedLanguage do
+    association :teacher
+    association :language, factory: :chinese
   end
 end

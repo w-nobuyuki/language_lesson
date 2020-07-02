@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Feedback, type: :model do
-  let(:lesson_reservation){ create(:lesson_reservation) }
+  let(:lesson_reservation){ create(:teacher_english_lesson_reservation) }
   it 'はlesson_reservationとbodyがあれば有効であること' do
     feedback = Feedback.new(lesson_reservation: lesson_reservation, body: 'フィードバック内容です')
     expect(feedback).to be_valid
