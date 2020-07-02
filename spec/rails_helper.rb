@@ -64,6 +64,7 @@ RSpec.configure do |config|
 
   config.include FactoryBot::Syntax::Methods
   config.include AuthenticationHelpers, type: :system
+  config.include LessonHelpers, type: :system
 
   config.before(:each) do |example|
     if example.metadata[:type] == :system
