@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :lesson_ticket do
-    charge { nil }
+    association :charge
+    association :user
   end
 end
