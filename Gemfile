@@ -8,7 +8,6 @@ gem 'carrierwave', '~> 2.0'
 gem 'cloudinary'
 gem 'devise'
 gem 'devise-i18n'
-gem 'faker'
 gem 'haml-rails'
 gem 'jbuilder', '~> 2.7'
 gem 'pg', '>= 0.18', '< 2.0'
@@ -43,6 +42,7 @@ end
 
 group :test do
   gem 'capybara', '>= 2.15'
+  gem 'faker'
   gem 'selenium-webdriver'
   gem 'webdrivers'
 end
