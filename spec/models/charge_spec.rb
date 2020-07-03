@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Charge, type: :model do
   let(:user) { create(:user) }
-  let(:item) { create(:item) }
+  let(:item) { create(:item_1) }
   it 'はユーザー、商品、StripeセッションIDが存在すれば登録できること' do
     charge = Charge.new(user: user, item: item, stripe_session_id: 'stripe-session-id')
     expect(charge).to be_valid
