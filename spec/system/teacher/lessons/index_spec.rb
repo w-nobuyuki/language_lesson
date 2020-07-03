@@ -44,13 +44,7 @@ RSpec.describe 'Teacher::Lessons#index', type: :system, js: true do
   end
 
   context 'レッスンが予約済みの場合' do
-    it 'レッスンを削除しようとするとエラー画面が表示されること' do
-      create(:teacher_english_lesson_reservation, lesson: lesson)
-      accept_confirm do
-        click_link '削除'
-      end
-      expect(page).to have_content 'レッスン枠を削除しました。'
-    end
+    it 'レッスンを削除しようとするとエラー画面が表示されること'
     it 'レッスンには予約済みと表示されること' do
       create(:teacher_english_lesson_reservation, lesson: lesson)
       visit teacher_lessons_path
