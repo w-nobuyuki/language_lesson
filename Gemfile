@@ -22,6 +22,7 @@ gem 'simple_form_fancy_uploads'
 gem 'stripe'
 gem 'turbolinks', '~> 5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'webmock'
 gem 'webpacker', '~> 4.0'
 gem 'zoom_rb'
 
