@@ -22,7 +22,6 @@ gem 'simple_form_fancy_uploads'
 gem 'stripe'
 gem 'turbolinks', '~> 5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'webmock'
 gem 'webpacker', '~> 4.0'
 gem 'zoom_rb'
 
@@ -30,6 +29,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_bot_rails'
   gem 'rspec-rails', '~> 4.0.0'
+  gem 'webmock'
 end
 
 group :development do
