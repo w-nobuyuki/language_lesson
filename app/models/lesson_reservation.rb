@@ -17,7 +17,7 @@ class LessonReservation < ApplicationRecord
       start_time: lesson_reservation.lesson.start_at,
       duration: 50,
       timezone: 'Asia/Tokyo',
-      password: Faker::Lorem.characters(number: 6),
+      password: generate_unique_secure_token,
       settings: {
         host_video: true,
         participant_video: true,
