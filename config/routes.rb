@@ -35,7 +35,12 @@ Rails.application.routes.draw do
   resources :lesson_reservations, only: %i[index create]
 
   namespace :webhook do
-    resources :charges, only: :create
+    resources :charges, only: :create do
+      collection do
+        get :success
+        get :cancel
+      end
+    end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

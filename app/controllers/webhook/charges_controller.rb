@@ -17,4 +17,15 @@ class Webhook::ChargesController < Webhook::ApplicationController
       head :internal_server_error
     end
   end
+
+  def success
+    if params[:session_id].present? && Stripe::Checkout::Session.retrieve(params[:session_id])
+      flash[:notice] = 'チケットの購入が完了しました。チケット数の反映は少し時間がかかる場合があります。'
+    end
+    redirect_to items_url
+  end
+
+  def cancel
+    redirect_to items_url, notice: 'チケットの購入をキャンセルしました。'
+  end
 end

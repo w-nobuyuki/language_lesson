@@ -4,7 +4,8 @@ class ChargesController < ApplicationController
   def new
     charge = @item.charges.build
     @session = charge.stripe_checkout_session(
-      redirect_url: items_url,
+      success_url: success_webhook_charges_url,
+      cancel_url: cancel_webhook_charges_url,
       user_id: current_user.id
     )
   end

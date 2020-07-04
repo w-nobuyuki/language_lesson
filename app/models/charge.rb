@@ -5,7 +5,7 @@ class Charge < ApplicationRecord
 
   validates :stripe_session_id, presence: true, uniqueness: true
 
-  def stripe_checkout_session(redirect_url:, user_id:)
+  def stripe_checkout_session(success_url:, cancel_url:, user_id:)
     Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
       line_items: [
@@ -22,8 +22,8 @@ class Charge < ApplicationRecord
         }
       ],
       mode: 'payment',
-      success_url: redirect_url + '?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: redirect_url,
+      success_url: success_url + '?session_id={CHECKOUT_SESSION_ID}',
+      cancel_url: cancel_url,
       metadata: {
         user_id: user_id,
         quantity: item.quantity,
