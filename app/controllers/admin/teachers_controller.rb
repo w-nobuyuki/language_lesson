@@ -2,7 +2,7 @@ class Admin::TeachersController < Admin::ApplicationController
   before_action :set_teacher, only: %i[show edit update destroy login]
 
   def index
-    @teachers = Teacher.all
+    @teachers = Teacher.all.order(id: 'ASC')
   end
 
   def new
