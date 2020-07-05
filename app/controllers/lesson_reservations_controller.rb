@@ -8,7 +8,8 @@ class LessonReservationsController < ApplicationController
       redirect_to items_path, notice: 'レッスンの予約にはチケットの購入が必要です'
       return
     end
-    @lesson_reservation = current_user.lesson_reservations.new_with_zoom_url(lesson_reservation_params)
+    @lesson_reservation = current_user.lesson_reservations.build(lesson_reservation_params)
+    @lesson_reservation.assign_zoom_url
 
     respond_to do |format|
       if @lesson_reservation.save
