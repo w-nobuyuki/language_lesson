@@ -30,7 +30,7 @@ RSpec.describe Lesson, type: :model do
   it 'は開始日時の時間帯が7時より早い場合登録できないこと' do
     lesson = Lesson.new(start_at: '2100/1/1 06:00')
     lesson.valid?
-    expect(lesson.errors[:start_at]).to include('は不正な値です')
+    expect(lesson.errors[:start_at]).to include('は7時～22時の間で入力してください')
   end
   it 'は開始日時の時間帯が7時の場合登録できること' do
     lesson = Lesson.new(start_at: '2100/1/1 07:00')
@@ -40,7 +40,7 @@ RSpec.describe Lesson, type: :model do
   it 'は開始日時の時間帯が22時より遅い場合登録できないこと' do
     lesson = Lesson.new(start_at: '2100/1/1 23:00')
     lesson.valid?
-    expect(lesson.errors[:start_at]).to include('は不正な値です')
+    expect(lesson.errors[:start_at]).to include('は7時～22時の間で入力してください')
   end
   it 'は開始日時の時間帯が22時の場合登録できること' do
     lesson = Lesson.new(start_at: '2100/1/1 22:00')
@@ -50,12 +50,12 @@ RSpec.describe Lesson, type: :model do
   it 'は開始日時の分の値が00以外の場合登録できないこと' do
     lesson = Lesson.new(start_at: '2100/1/1 07:10')
     lesson.valid?
-    expect(lesson.errors[:start_at]).to include('は不正な値です')
+    expect(lesson.errors[:start_at]).to include('は7時～22時の間で入力してください')
   end
   it 'は開始日時の秒の値が00以外の場合登録できないこと' do
     lesson = Lesson.new(start_at: '2100/1/1 07:00:10')
     lesson.valid?
-    expect(lesson.errors[:start_at]).to include('は不正な値です')
+    expect(lesson.errors[:start_at]).to include('は7時～22時の間で入力してください')
   end
   it 'は終了日時が開始日時の50分後であること' do
     lesson = Lesson.new(start_at: '2100/1/1 07:00')

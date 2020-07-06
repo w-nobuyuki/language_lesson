@@ -51,14 +51,14 @@ RSpec.describe 'Teacher::Lessons#new', type: :system do
     start_at = Time.new(Date.tomorrow.year, Date.tomorrow.month, Date.tomorrow.day, 23)
     fill_in 'lesson[start_at]', with: start_at
     click_button '登録する'
-    expect(page).to have_content '開始日時は不正な値です'
+    expect(page).to have_content '開始日時は7時～22時の間で入力してください'
   end
 
   it '開始日時の時間は分、秒の単位が00:00のみ登録できること' do
     start_at = Time.new(Date.tomorrow.year, Date.tomorrow.month, Date.tomorrow.day, 12, 1, 1)
     fill_in 'lesson[start_at]', with: start_at
     click_button '登録する'
-    expect(page).to have_content '開始日時は不正な値です'
+    expect(page).to have_content '開始日時は7時～22時の間で入力してください'
   end
 
   it '開始日時は過去の日時は登録できないこと' do

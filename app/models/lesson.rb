@@ -7,10 +7,10 @@ class Lesson < ApplicationRecord
 
   validates :start_at,
             presence: true,
-            uniqueness: { scope: :teacher },
-            format: { with: /\A*(0[7-9]|1[0-9]|2[0-2]):00:00 \+0900\z/, allow_blank: true }
+            uniqueness: { scope: :teacher }
 
   validate :cannot_past_datetime
+  validate :start_at_only_7am_to_10pm
 
   scope :only_reservable, lambda {
     includes(:lesson_reservation).where(lesson_reservations: { id: nil }, start_at: Time.current.since(1.hours)..)
@@ -24,5 +24,12 @@ class Lesson < ApplicationRecord
     return if start_at.blank?
 
     errors.add(:start_at, 'は過去の日付は入力できません') if start_at < Time.current
+  end
+
+  def start_at_only_7am_to_10pm
+    return if start_at.blank?
+    return if start_at.hour >= 7 && start_at.hour <= 22 && start_at.min == 0 && start_at.sec == 0
+
+    errors.add(:start_at, 'は7時～22時の間で入力してください')
   end
 end
