@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :admins, only: %i[sessions]
+  devise_for :admin, only: %i[sessions]
   namespace :admin do
     root 'home#index'
     resources :teachers, only: %i[index new create edit update destroy] do
@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     end
   end
 
-  devise_for :teachers, only: %i[sessions]
+  devise_for :teacher, only: %i[sessions]
   namespace :teacher do
     root 'home#index'
     get 'edit', to: 'home#edit'
@@ -23,10 +23,10 @@ Rails.application.routes.draw do
   end
 
   root 'home#index'
-  devise_for :users, only: %i[sessions]
+  devise_for :user, only: %i[sessions]
   as :user do
-    get '/users/sign_up', to: 'users/registrations#new', as: :new_user_registration
-    post '/users', to: 'users/registrations#create', as: :user_registration
+    get '/user/sign_up', to: 'user/registrations#new', as: :new_user_registration
+    post '/user', to: 'user/registrations#create', as: :user_registration
   end
   resources :lessons, only: :index
   resources :items, only: :index do

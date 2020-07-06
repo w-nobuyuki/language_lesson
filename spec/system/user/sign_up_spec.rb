@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Users#sign_up', type: :system do
+RSpec.describe 'User#sign_up', type: :system do
   before do
     visit new_user_registration_path
     fill_in 'user[email]', with: 'user@tryout.com'

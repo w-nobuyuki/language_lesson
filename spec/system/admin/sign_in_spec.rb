@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Admins#sign_in", type: :system do
+RSpec.describe "Admin#sign_in", type: :system do
   let!(:admin) { create(:admin) }
   before do
     visit new_admin_session_path
