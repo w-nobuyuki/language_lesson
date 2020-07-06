@@ -13,16 +13,16 @@ class Lesson < ApplicationRecord
   validate :cannot_past_datetime
 
   scope :only_reservable, lambda {
-    includes(:lesson_reservation).where(lesson_reservations: { id: nil }, start_at: Time.now + 3600..)
+    includes(:lesson_reservation).where(lesson_reservations: { id: nil }, start_at: Time.current.since(1.hours)..)
   }
 
   def end_at
-    start_at + 3000
+    start_at.since(50.minutes)
   end
 
   def cannot_past_datetime
     return if start_at.blank?
 
-    errors.add(:start_at, 'は過去の日付は入力できません') if start_at < Time.now
+    errors.add(:start_at, 'は過去の日付は入力できません') if start_at < Time.current
   end
 end

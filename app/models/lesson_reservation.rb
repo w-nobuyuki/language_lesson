@@ -9,7 +9,7 @@ class LessonReservation < ApplicationRecord
   validate :cannot_reserve_same_datetime
   validate :cannot_reserve_same_lesson_ticket
 
-  scope :only_completed, -> { joins(:lesson).where('lessons.start_at < ?', Time.now)}
+  scope :only_completed, -> { joins(:lesson).where('lessons.start_at < ?', Time.current)}
 
   def cannot_reserve_same_datetime
     return if lesson_ticket.blank? || lesson.blank?

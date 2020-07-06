@@ -17,6 +17,6 @@
         %td
           %a{ href: lesson_reservation.zoom_url}= lesson_reservation.zoom_url
         %td
-          - if lesson_reservation.lesson.end_at < Time.now
+          - if lesson_reservation.lesson.end_at < Time.current
             = link_to 'フィードバック', teacher_lesson_reservation_feedbacks_path(lesson_reservation), class: 'btn btn-outline-primary'
             = link_to '申し送り', teacher_lesson_reservation_notifications_path(lesson_reservation), class: 'btn btn-outline-primary'
