@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe 'Teacher::Home#edit', type: :system do
+RSpec.describe 'Teacher::Profiles#edit', type: :system do
   let!(:teacher) { create(:teacher) }
   before do
     visit new_teacher_session_path
     fill_in 'teacher[email]',	with: 'teacher@tryout.com'
     fill_in 'teacher[password]',	with: 'password'
     click_button 'ログイン'
-    visit teacher_edit_path
+    visit edit_teacher_profile_path
     fill_in 'teacher[current_password]', with: 'password'
   end
 
@@ -25,14 +25,14 @@ RSpec.describe 'Teacher::Home#edit', type: :system do
   it '講師名を変更し更新すると、その変更が反映されること' do
     fill_in 'teacher[name]', with: 'Teacher2'
     click_button '更新する'
-    visit teacher_edit_path
+    visit edit_teacher_profile_path
     expect(page.find_field('teacher[name]').value).to eq 'Teacher2'
   end
 
   it 'プロフィールを変更し更新すると、その変更が反映されること' do
     fill_in 'teacher[profile]', with: '更新後のプロフィール'
     click_button '更新する'
-    visit teacher_edit_path
+    visit edit_teacher_profile_path
     expect(page.find_field('teacher[profile]').value).to eq '更新後のプロフィール'
   end
 
@@ -40,18 +40,18 @@ RSpec.describe 'Teacher::Home#edit', type: :system do
     rails_png = File.join(Rails.root, '/spec/resources/image.png')
     attach_file 'teacher[avatar]', rails_png
     click_button '更新する'
-    visit teacher_edit_path
+    visit edit_teacher_profile_path
     expect(page.find('img')['src']).to match(/thumb_image.png/)
   end
 
   it '対応言語を変更し更新すると、その変更が反映されること' do
     create(:english)
     create(:chinese)
-    visit teacher_edit_path
+    visit edit_teacher_profile_path
     select('英語', from: 'teacher[language_ids][]')
     select('中国語', from: 'teacher[language_ids][]')
     click_button '更新する'
-    visit teacher_edit_path
+    visit edit_teacher_profile_path
     expect(page).to have_select('teacher[language_ids][]', selected: %w[英語 中国語])
   end
 

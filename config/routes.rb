@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   devise_for :teacher, only: %i[sessions]
   namespace :teacher do
     root 'home#index'
+    resource 'profile', only: %i[edit update]
     get 'edit', to: 'home#edit'
     patch 'update', to: 'home#update'
     resources :lessons, only: %i[index new create edit update destroy]

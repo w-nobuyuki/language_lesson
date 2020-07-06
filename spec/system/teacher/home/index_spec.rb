@@ -31,7 +31,7 @@ RSpec.describe 'Teacher::Home#index', type: :system do
   it 'メニューのプロフィール編集をクリックするとプロフィール編集画面へ画面遷移すること' do
     click_link 'メニュー'
     click_link 'プロフィール編集'
-    expect(current_path).to eq teacher_edit_path
+    expect(current_path).to eq edit_teacher_profile_path
   end
 
   it 'メニューのログアウトをクリックすると講師がログアウトすること' do
