@@ -2,8 +2,8 @@ class LessonReservation < ApplicationRecord
   belongs_to :lesson
   belongs_to :lesson_ticket
   delegate :user, to: :lesson_ticket
-  has_many :feedbacks
-  has_many :notifications
+  has_many :feedbacks, dependent: :restrict_with_exception
+  has_many :notifications, dependent: :restrict_with_exception
 
   validates :zoom_url, presence: true
   validate :cannot_reserve_same_datetime

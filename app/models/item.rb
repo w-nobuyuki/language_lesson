@@ -1,5 +1,5 @@
 class Item < ApplicationRecord
-  has_many :charges
+  has_many :charges, dependent: :restrict_with_exception
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :amount, presence: true,

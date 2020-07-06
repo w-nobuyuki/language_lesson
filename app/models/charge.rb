@@ -1,7 +1,7 @@
 class Charge < ApplicationRecord
   belongs_to :user
   belongs_to :item
-  has_many :lesson_tickets
+  has_many :lesson_tickets, dependent: :restrict_with_exception
 
   validates :stripe_session_id, presence: true, uniqueness: true
 

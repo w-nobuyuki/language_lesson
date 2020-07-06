@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  has_many :charges
-  has_many :lesson_tickets
+  has_many :charges, dependent: :destroy
+  has_many :lesson_tickets, dependent: :destroy
   has_many :lesson_reservations, through: :lesson_tickets
   has_many :notifications, through: :lesson_reservations
 
