@@ -1,5 +1,5 @@
 %h2 残チケット数
-%p= "残チケット数は #{current_user.lesson_tickets.count} 枚です。"
+%p= "残チケット数は #{current_user.lesson_tickets.not_used.count} 枚です。"
 
 %h2 チケット購入
 

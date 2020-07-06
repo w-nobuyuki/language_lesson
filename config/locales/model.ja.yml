@@ -51,6 +51,7 @@ ja:
         lesson: レッスン
         user: ユーザー
         zoom_url: ZOOM URL
+        lesson_ticket: レッスンチケット
       supported_language:
         teacher: 講師
         language: 言語

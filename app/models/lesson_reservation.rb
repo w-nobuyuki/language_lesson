@@ -1,21 +1,32 @@
 class LessonReservation < ApplicationRecord
   belongs_to :lesson
-  belongs_to :user
+  belongs_to :lesson_ticket
+  delegate :user, to: :lesson_ticket
   has_many :feedbacks
   has_many :notifications
 
   validates :zoom_url, presence: true
   validate :cannot_reserve_same_datetime
+  validate :cannot_reserve_same_lesson_ticket
 
   scope :only_completed, -> { joins(:lesson).where('lessons.start_at < ?', Time.now)}
 
   def cannot_reserve_same_datetime
-    LessonReservation.where(user_id: user_id).each do |reservation|
+    return if lesson_ticket.blank? || lesson.blank?
+
+    LessonReservation.where(id: user.lesson_reservations.ids).each do |reservation|
       next if reservation.lesson.start_at != lesson.start_at
 
       errors.add(:base, 'その日時は他のレッスンを予約済みです')
       break
     end
+  end
+
+  def cannot_reserve_same_lesson_ticket
+    return if lesson_ticket.blank?
+    return unless LessonReservation.find_by(lesson_ticket: lesson_ticket)
+
+    errors.add(:lesson_ticket, 'は使用済みです。予約はキャンセルされました。')
   end
 
   def assign_zoom_url

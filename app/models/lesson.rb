@@ -2,7 +2,8 @@ class Lesson < ApplicationRecord
   belongs_to :teacher
   belongs_to :language
   has_one :lesson_reservation, dependent: :restrict_with_error
-  has_one :user, through: :lesson_reservation
+  has_one :lesson_ticket, through: :lesson_reservation
+  has_one :user, through: :lesson_ticket
 
   validates :start_at,
             presence: true,

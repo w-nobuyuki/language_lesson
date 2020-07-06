@@ -4,7 +4,8 @@ RSpec.describe 'Teacher::Feedbacks#new', type: :system do
   let!(:user) { create(:user) }
   let!(:teacher) { create(:teacher) }
   let!(:lesson) { create(:teacher_english_lesson, teacher: teacher) }
-  let!(:lesson_reservation) { create(:teacher_english_lesson_reservation, user: user, lesson: lesson) }
+  let!(:lesson_ticket) { create(:lesson_ticket, user: user) }
+  let!(:lesson_reservation) { create(:teacher_english_lesson_reservation, lesson: lesson, lesson_ticket: lesson_ticket) }
 
   before do
     lesson.start_at = Date.yesterday.strftime('%Y/%m/%d 12:00')

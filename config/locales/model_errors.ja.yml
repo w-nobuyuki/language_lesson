@@ -1,0 +1,8 @@
+ja:
+  activerecord:
+    errors:
+      models:
+        lesson_reservation:
+          attributes:
+            lesson_ticket:
+              blank:  'がありません。チケット購入ページからチケットを購入してください。'

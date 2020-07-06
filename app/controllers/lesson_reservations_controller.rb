@@ -4,16 +4,16 @@ class LessonReservationsController < ApplicationController
   end
 
   def create
-    if current_user.lesson_tickets.blank?
+    if current_user.lesson_tickets.not_used.blank?
       redirect_to items_path, notice: 'レッスンの予約にはチケットの購入が必要です'
       return
     end
-    @lesson_reservation = current_user.lesson_reservations.build(lesson_reservation_params)
+    @lesson_reservation = LessonReservation.new(lesson_reservation_params)
     @lesson_reservation.assign_zoom_url
+    @lesson_reservation.lesson_ticket = current_user.lesson_tickets.not_used.first
 
     respond_to do |format|
       if @lesson_reservation.save
-        current_user.lesson_tickets.first.destroy!
         LessonMailer.notice_user(@lesson_reservation.lesson).deliver_now
         LessonMailer.notice_teacher(@lesson_reservation.lesson).deliver_now
         format.html { redirect_to lessons_path, notice: 'レッスンを予約しました。' }
