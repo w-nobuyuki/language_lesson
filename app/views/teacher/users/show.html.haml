@@ -16,6 +16,6 @@
           - lesson_reservation.notifications.each.with_index do |notification, index|
             - unless index.zero?
               %hr/
-            = raw h(notification.body).gsub(/\R/, '<br>')
+            = simple_format(notification.body)
 
 = link_to '戻る', teacher_lesson_reservations_path, class: 'btn btn-outline-secondary'

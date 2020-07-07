@@ -9,7 +9,7 @@
   %tbody
     - @feedbacks.each do |feedback|
       %tr
-        %td= feedback.body
+        %td= simple_format(feedback.body)
         %td= feedback.created_at.strftime('%Y/%m/%d %H:%M:%S')
         %td
           = link_to '編集',
