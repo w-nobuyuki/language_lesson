@@ -3,7 +3,7 @@ class Teacher::FeedbacksController < Teacher::ApplicationController
   before_action :set_feedback, only: %i[edit update destroy]
 
   def index
-    @feedbacks = @lesson_reservation.feedbacks
+    @feedbacks = @lesson_reservation.feedbacks.order(id: 'ASC')
   end
 
   def new

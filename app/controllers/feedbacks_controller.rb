@@ -1,7 +1,7 @@
 class FeedbacksController < ApplicationController
   before_action :set_lesson_reservation, only: :index
   def index
-    @feedbacks = @lesson_reservation.feedbacks
+    @feedbacks = @lesson_reservation.feedbacks.order(id: 'ASC')
   end
 
   private

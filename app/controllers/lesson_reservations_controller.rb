@@ -1,6 +1,6 @@
 class LessonReservationsController < ApplicationController
   def index
-    @lesson_reservations = current_user.lesson_reservations.includes(lesson: %i[teacher language])
+    @lesson_reservations = current_user.lesson_reservations.includes(lesson: %i[teacher language]).order("lessons.start_at asc")
   end
 
   def create

@@ -3,7 +3,7 @@ class Teacher::NotificationsController < Teacher::ApplicationController
   before_action :set_notification, only: %i[edit update destroy]
 
   def index
-    @notifications = @lesson_reservation.notifications
+    @notifications = @lesson_reservation.notifications.order(id: 'ASC')
   end
 
   def new

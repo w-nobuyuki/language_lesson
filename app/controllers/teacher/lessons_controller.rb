@@ -2,7 +2,7 @@ class Teacher::LessonsController < Teacher::ApplicationController
   before_action :set_lesson, only: %i[edit update destroy]
 
   def index
-    @lessons = current_teacher.lessons
+    @lessons = current_teacher.lessons.order(start_at: 'ASC')
   end
 
   def new
