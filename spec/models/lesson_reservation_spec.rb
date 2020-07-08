@@ -44,4 +44,10 @@ RSpec.describe LessonReservation, type: :model do
     expect(lesson_reservation.errors[:lesson_ticket]).to include('は使用済みです。予約はキャンセルされました。')
   end
 
+  # vcr gem
+  # 自前で応答を偽造
+  # rspec mock
+  #   lesson_reservation = LessonReservation.new
+  #   lesson_reservation.new_zoom_client => dummy zoom client
+  #   dummy zoom client receives meeting_create => { 'meeting_room' => 'hogehoge' }
 end
