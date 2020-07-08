@@ -1,0 +1,35 @@
+%h1 時間帯別予約率
+= search_form_for @q,
+  url: reservation_rate_hours_path,
+  wrapper: :horizontal_form,
+  wrapper_mappings: {datetime: :horizontal_form, } do |f|
+  .form-group.row
+    .col-sm-3.col-form-label
+      = f.label '開始日時'
+    .col-sm
+      = f.datetime_field :start_at_gteq, class: 'form-control'
+    .col-form-label
+      ～
+    .col-sm
+      = f.datetime_field :start_at_lteq, class: 'form-control'
+  .form-group.row
+    .col-sm-9.offset-sm-3
+      = f.button :submit, class: "btn-outline-primary"
+
+%table.table
+  %thead
+    %th 日
+    - 7.upto(22) do |time|
+      %th= "#{time} 時"
+  %tbody
+    - @lessons.each do |date, lessons|
+      %tr
+        %td=I18n.l date, format: '%Y/%m/%d(%a)'
+        - lessons = lessons.group_by { |lesson| lesson.start_at.strftime('%k') }
+        - 7.upto(22) do |time|
+          - if lessons["#{time}"].present?
+            - reserved_lessons_count = h_reserved_lessons_count(lessons[time.to_s])
+            %td{ class: h_reservation_rate_color(reserved_lessons_count, lessons[time.to_s].count)}
+              = "#{reserved_lessons_count}/#{lessons[time.to_s].count}"
+          - else
+            %td 0/0

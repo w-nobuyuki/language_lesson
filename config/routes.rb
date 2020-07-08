@@ -36,6 +36,9 @@ Rails.application.routes.draw do
   resources :lesson_reservations, only: %i[index create] do
     resources :feedbacks, only: :index
   end
+  namespace :reservation_rate do
+    resources :hours, only: :index
+  end
 
   namespace :webhook do
     resources :charges, only: :create do

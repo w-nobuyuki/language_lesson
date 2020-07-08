@@ -9,6 +9,11 @@
           = link_to 'レッスン予約', lessons_path, class: "nav-link #{h_active(lessons_path)}"
         %li.nav-item
           = link_to '予約済みレッスン一覧', lesson_reservations_path, class: "nav-link #{h_active(lesson_reservations_path)}"
+        %li.nav-item.dropdown
+          %a.nav-link.dropdown-toggle#reservation-rate-link{ href: '#', 'data-toggle' => 'dropdown', aria: { haspopup: true, expanded: false } }
+            予約率
+          .dropdown-menu{ 'aria-labelledby' => 'reservation-rate-link' }
+            = link_to '時間帯別', reservation_rate_hours_path, class: 'dropdown-item'
       %ul.navbar-nav.ml-auto
         %li.nav-item.dropdown
           %a#usermenu.nav-link.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}, aria: {haspopup: true, expanded: false}} メニュー
