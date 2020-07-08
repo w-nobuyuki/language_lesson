@@ -4,6 +4,14 @@ FactoryBot.define do
     description { "レッスンチケット1枚のの購入券です" }
     amount { 2160 }
     quantity { 1 }
+
+    # バリエーションは trait で追加
+    # trait :three do
+    #   name { "レッスンチケット（3枚）" }
+    #   description { "レッスンチケット3枚の購入券です" }
+    #   amount { 5400 }
+    #   quantity { 3 }
+    # end
   end
 
   factory :item_3, class: Item do

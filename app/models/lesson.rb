@@ -1,3 +1,5 @@
+# lesson -> lesson_reservation -> lesson_ticket -> user
+
 class Lesson < ApplicationRecord
   belongs_to :teacher
   belongs_to :language
@@ -13,6 +15,7 @@ class Lesson < ApplicationRecord
   validate :start_at_only_7am_to_10pm
 
   scope :only_reservable, lambda {
+    # 1.hours.since
     includes(:lesson_reservation).where(lesson_reservations: { id: nil }, start_at: Time.current.since(1.hours)..)
   }
 

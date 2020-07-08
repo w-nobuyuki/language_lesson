@@ -2,6 +2,7 @@ class Admin::TeachersController < Admin::ApplicationController
   before_action :set_teacher, only: %i[show edit update destroy login]
 
   def index
+    # ASC は order(:id) で ok
     @teachers = Teacher.all.order(id: 'ASC')
   end
 

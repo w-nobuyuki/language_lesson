@@ -2,7 +2,9 @@ require 'rails_helper'
 
 Rails.describe FeedbackMailer, type: :mailer do
   describe 'new_feedback' do
-    let(:feedback) { create(:teacher_english_lesson_feedback) }
+    # リテラル
+    let(:feedback) { create(:teacher_english_lesson_feedback, body: 'よかったです') }
+    # deliver_now する必要なさそう
     let(:mail) { FeedbackMailer.new_feedback(feedback).deliver_now }
 
     it 'は件名が「【tryout】レッスンのフィードバックが登録されました」であること' do
@@ -14,7 +16,8 @@ Rails.describe FeedbackMailer, type: :mailer do
     end
 
     it 'は本文にフィードバックの内容が含まれること' do
-      expect(mail.body.encoded).to match feedback.body
+      # 期待値はあえてのリテラル
+      expect(mail.body.encoded).to match 'よかったです'
     end
 
     it 'は本文に担当講師名が含まれること' do

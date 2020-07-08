@@ -1,5 +1,6 @@
 require "rails_helper"
 
+# ファイル名: lesson_mailer_spec.rb
 RSpec.describe LessonMailer, type: :mailer do
   describe 'notice_user' do
     let(:lesson_reservation) { create(:teacher_english_lesson_reservation) }

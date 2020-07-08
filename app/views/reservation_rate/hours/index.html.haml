@@ -16,16 +16,19 @@
     .col-sm-9.offset-sm-3
       = f.button :submit, class: "btn-outline-primary"
 
+-# 表に埋めるデータの生成をモデルに寄せる
 %table.table
   %thead
     %th 日
     - 7.upto(22) do |time|
       %th= "#{time} 時"
   %tbody
+    -# @lessons = 日ごとのレッスン, @lessons_by_date
     - @lessons.each do |date, lessons|
       %tr
         %td=I18n.l date, format: '%Y/%m/%d(%a)'
         - lessons = lessons.group_by { |lesson| lesson.start_at.strftime('%k') }
+        -# lessons = 時間毎のレッスン, lessons_by_hour
         - 7.upto(22) do |time|
           - if lessons["#{time}"].present?
             - reserved_lessons_count = h_reserved_lessons_count(lessons[time.to_s])
